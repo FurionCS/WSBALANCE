@@ -1,26 +1,14 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<!-- 
+		这是自定义标签模板，如果用不到哪个标签请删除，不然会报错
+ -->
+<%@ taglib uri="Mytag" prefix="Layout"%>
+<Layout:overwrite name="title">
+I am title
+</Layout:overwrite>
+<%-- <Layout:overwrite name="Mycss"></Layout:overwrite> --%>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
-</html>
+<Layout:overwrite name="MyContent">
+<div>成功了哈哈哈哈，开心</div>
+</Layout:overwrite>
+<%-- <Layout:overwrite name="MyScript"></Layout:overwrite> --%>
+<%@ include file="/share/_Layout.jsp"%>

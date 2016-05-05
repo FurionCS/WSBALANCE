@@ -10,7 +10,8 @@
 
     <package name="default" namespace="/" extends="struts-default">
 		 <action name="*_*" class="com.wsbalance.action.{1}" method="{2}">
-			<result name="input">/index.jsp</result>
+			<result name="input" type="redirect">/login.jsp</result>
+			<result name="index" type="redirect" >/index.jsp</result>
 			<result name="AgentTree" type="redirect">Agent/AgentTree.jsp</result>
 			<result name="addAgent" type="redirect">/Agent/addAgent.jsp</result>
 		</action>

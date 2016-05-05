@@ -207,7 +207,7 @@
 		            success: function (result) {
 		            	if (result.code == 1) {
 		                     noty({ text: "添加成功！", type: "success", layout: "topCenter", timeout: 3000 }); $("#InfoForm")[0].reset();
-		                     setTimeout(function () { location.href = "Agent/AgentTree.jsp?active=menupage6_6" }, 1000);
+		                     setTimeout(function () { location.href = "Agent/AgentTree.jsp?active=menupage6_1" }, 1000);
 		                 }
 		                 else {
 		                     noty({ text: "添加失败，请重新操作！", type: "warning", layout: "topCenter", timeout: 3000 });

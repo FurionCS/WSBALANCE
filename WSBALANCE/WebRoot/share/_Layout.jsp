@@ -94,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </a>
                     <ul class="sub-menu">
                         <li id="menupage6_6">
-                            <a href="Agent/AgentTree.jsp?active=menupage6_6">代理树图</a>
+                            <a href="Agent/AgentTree.jsp?active=menupage6_1">代理树图</a>
                         </li>
     				<li id="menupage6_0">
                             <a href="Agent/addAgent.jsp?active=menupage6_0">增加代理</a>

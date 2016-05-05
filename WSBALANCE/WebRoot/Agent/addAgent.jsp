@@ -77,6 +77,7 @@
                             <label class="control-label">上家微信号</label>
                             <div class="controls">
                                 <input type="text" name="agpwxnum" id="agpwxnum" class="span6 m-wrap popovers" data-trigger="hover" data-content="请填写代理上家" data-input="text" data-maxlength="250" required />
+                                <input type="text" id="agpid" style="display: none"/>
                                 <span style="color: red;" id="agpwxnum"></span>
                             </div>
                         </div>
@@ -137,6 +138,7 @@
 			    }
 			    else $("#spanAgtel").html("请输入正确的手机号");
 			});
+			
 			$("#aglevel").keyup(function (e) {
 			    if (chekcLevel(this.value)) {
 			        $("#spanAglevel").html("");
@@ -149,8 +151,31 @@
 			    }
 			    else $("#spanAgauthorization").html("请输入代理授权码");
 			});
-			
-			
+			$("#agpwxnum").blur(function (e) {
+			    if (checkPwxnum(this.value)) {
+			        $("#spanAgpwxnum").html("");
+			    }
+			    else $("#spanAgpwxnum").html("请输入存在的上家");
+			});
+			function checkPwxnum(agpwxnum){
+				var flag=false;
+				 $.ajax({
+			            url: "AgentAction_getAgentByAgwxnum",
+			            type: "POST",
+			            data: {"agent.agwxnum":agpwxnum},
+			            dataType: "json",
+			            success: function (result) {
+			            	if(result.code==1){
+			            		var agent=result.agent;
+			            		$("#agpid").val(agent.agid);
+			            		flag=true;
+			            	}else{
+			            		$("#agpid").val("");
+			            	}
+			            }
+				 });
+				 return flag;
+			}
 			function SaveForm() {
 				var agname=$("#agname").val().trim();
 				 if (checkCName(agname)) { $("#spanAgname").html("");}
@@ -168,7 +193,7 @@
 				 else{ $("#spanAgtel").html("请输入正确的手机号");return false;};
 				var agpassword=$("#agpassword").val().trim();
 				 if(agpassword==""){agpassword="123456";};
-				var agpwxnum=$("#agpwxnum").val().trim();
+				var agpid=$("#agpid").val().trim();
 				var aglevel=$("#aglevel").val().trim();
 				 if (chekcLevel(aglevel)) { $("#spanAglevel").html("");}
 				 else{ $("#spanAglevel").html("请输入0以上的正整数");return false;};
@@ -177,7 +202,7 @@
 		        $.ajax({
 		            url: "AgentAction_addAgent",
 		            type: "POST",
-		            data: {"agent.agname": agname,"agent.agwxnum": agwxnum,"agent.agidcard": agidcard,"agent.agtel": agtel,"agent.agpassword": agpassword,"agent.aglevel": aglevel,"agent.agauthorization": agauthorization},
+		            data: {"agent.agname": agname,"agent.agwxnum": agwxnum,"agent.agidcard": agidcard,"agent.agtel": agtel,"agent.agpassword": agpassword,"agent.aglevel": aglevel,"agent.agpid": agpid,"agent.agauthorization": agauthorization},
 		            dataType: "json",
 		            success: function (result) {
 		            	if (result.code == 1) {

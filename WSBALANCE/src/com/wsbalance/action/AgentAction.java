@@ -3,6 +3,7 @@ package com.wsbalance.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +37,20 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 		if(agentService.addAgent(agent)){
 			jb.put("code", 1);
 		}else{jb.put("code", 0);};
+		PrintWriter out=response.getWriter();
+		out.print(jb);
+		return null;
+	}
+	public String getAgentByAgwxnum() throws IOException{
+		List<Agent> lg=agentService.getAgentByAgwxnum(agent.getAgwxnum());
+		response.setCharacterEncoding("utf-8");
+		JSONObject jb =new JSONObject();
+		if(lg.size()>0){
+			jb.put("code", 1);
+			jb.put("agent", lg.get(0));
+		}else{
+			jb.put("code", 0);
+		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
 		return null;

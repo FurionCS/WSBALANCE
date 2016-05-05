@@ -1,5 +1,7 @@
 package com.wsbalance.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ public class AgentService {
 	
 	public boolean addAgent(Agent agent){
 		return agentDao.addAgent(agent);
+	}
+	public List<Agent> getAgentByAgwxnum(String agwxnum){
+		return agentDao.getAgentByAgwxnum(agwxnum);
 	}
 
 }

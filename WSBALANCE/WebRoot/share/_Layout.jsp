@@ -88,17 +88,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                 <li id="menupage6">
                     <a href="javascript:;">
-                        <i class="icon-book"></i>
-                        <span class="title">板块管理</span>
+                        <i class="icon-male"></i>
+                        <span class="title">代理管理</span>
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
                         <li id="menupage6_6">
-                            <a href="PlateView/PlateTree.jsp?active=menupage6_6">板块列表</a>
+                            <a href="Agent/AgentTree.jsp?active=menupage6_6">代理树图</a>
                         </li>
-              <!--           <li id="menupage6_0">
-                            <a href="PlateView/AddPlate.jsp?active=menupage6_0">板块添加</a>
-                        </li> -->
+    				<li id="menupage6_0">
+                            <a href="Agent/addAgent.jsp?active=menupage6_0">增加代理</a>
+                        </li> 
                         <!-- <li id="menupage6_5">
                             <a href="CommunicationView/Addone.jsp?active=menupage6_5">板块详细信息</a>
                         </li>   -->
@@ -107,8 +107,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                     <li id="menupage5">
                     <a href="javascript:;">
-                        <i class="icon-male"></i>
-                        <span class="title">用户管理</span>
+                        <i class="icon-book"></i>
+                        <span class="title">业绩管理</span>
                         <span class="arrow "></span>
                     </a>
                      <ul class="sub-menu">
@@ -119,11 +119,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="">工作记录</a>
                         </li> -->
                         <li id="menupage5_0">
-                            <a href="UserView/AdminList.jsp?active=menupage5_0">管理员列表</a>
+                            <a href="UserView/AdminList.jsp?active=menupage5_0">结算设定</a>
                         </li>
-                        <!-- <li id="menupage5_1">
-                            <a href="/Student/index?active=menupage5_1">学生信息列表</a>
-                        </li> -->
+                        <li id="menupage5_1">
+                            <a href="/Student/index?active=menupage5_1">业绩增加</a>
+                        </li>
+                        <li id="menupage5_2">
+                            <a href="Individual/Arrangement.jsp?active=menupage5_2">业绩查询</a>
+                        </li>
                     </ul>
                 </li>
                 <!--  <li id="menupage4">

@@ -8,44 +8,40 @@ import java.util.Date;
  *
  */
 public class Achievement {
-	private int AID;       //业绩id
-	private WSUsers WSUSER;  //总代ID
-	private double Money;  //业绩
-	private double PROPORTION;  //比例
-	private Date LASTTIME;      //最新更新时间
-	public int getAID() {
-		return AID;
+	private int aid;       //业绩id
+	private Agent agent;  //总代ID
+	private double money;  //业绩
+	private double proportion;  //比例
+	private Date lasttime;      //最新更新时间
+	public int getAid() {
+		return aid;
 	}
-	public void setAID(int aID) {
-		AID = aID;
+	public void setAid(int aid) {
+		this.aid = aid;
 	}
-	
-	public WSUsers getWSUSER() {
-		return WSUSER;
+	public Agent getAgent() {
+		return agent;
 	}
-	public void setWSUSER(WSUsers wSUSER) {
-		WSUSER = wSUSER;
+	public void setAgent(Agent agent) {
+		this.agent = agent;
 	}
 	public double getMoney() {
-		return Money;
+		return money;
 	}
 	public void setMoney(double money) {
-		Money = money;
+		this.money = money;
 	}
-	public double getPROPORTION() {
-		return PROPORTION;
+	public double getProportion() {
+		return proportion;
 	}
-	public void setPROPORTION(double pROPORTION) {
-		PROPORTION = pROPORTION;
+	public void setProportion(double proportion) {
+		this.proportion = proportion;
 	}
-	public Date getLASTTIME() {
-		return LASTTIME;
+	public Date getLasttime() {
+		return lasttime;
 	}
-	public void setLASTTIME(Date lASTTIME) {
-		LASTTIME = lASTTIME;
-	}
-	public Achievement() {
-		super();
+	public void setLasttime(Date lasttime) {
+		this.lasttime = lasttime;
 	}
 	
 }

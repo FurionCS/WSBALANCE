@@ -9,10 +9,12 @@
     <constant name="struts.devMode" value="true" />
 
     <package name="default" namespace="/" extends="struts-default">
-		<!-- <action name="*_*" class="com.wsbalance.action.{1}" method="{2}">
-			<result type="input">/index.jsp</result>
+		 <action name="*_*" class="com.wsbalance.action.{1}" method="{2}">
+			<result name="input">/index.jsp</result>
+			<result name="AgentTree" type="redirect">Agent/AgentTree.jsp</result>
+			<result name="addAgent" type="redirect">/Agent/addAgent.jsp</result>
 		</action>
-       -->
+      
     </package>
 
  

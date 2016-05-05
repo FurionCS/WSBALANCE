@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
+encoding//WebRoot/Agent/AgentTree.jsp=UTF-8
+encoding//WebRoot/Agent/addAgent.jsp=UTF-8
+encoding//WebRoot/Js/Check.js=UTF-8
 encoding//WebRoot/Scripts/bootstrap/OpenLayers.js=UTF-8
 encoding//WebRoot/Scripts/bootstrap/calendar-ch.js=UTF-8
 encoding//WebRoot/Scripts/bootstrap/locales/bootstrap-datetimepicker.ja.js=UTF-8

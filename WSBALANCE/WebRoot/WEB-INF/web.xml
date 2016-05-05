@@ -30,8 +30,31 @@
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-  
-  
+
+
+<!-- 登入控制 -->
+<filter>
+  <filter-name>CheckLoginFilter</filter-name>
+  <filter-class>com.wsbalance.filter.CheckLoginFilter</filter-class>
+  <init-param>
+       <param-name>checkSessionKey</param-name> 
+       <param-value>admin</param-value> 
+  </init-param>
+  <init-param>
+	  <param-name>redirectURL</param-name>
+	  <param-value>/login.jsp</param-value>
+  </init-param>
+  <init-param>
+       <param-name>notCheckURLList</param-name> 
+       <param-value>/Error/Error404.jsp;/login.jsp;</param-value> 
+  </init-param>
+   
+ </filter>
+  <filter-mapping>
+	  <filter-name>CheckLoginFilter</filter-name>
+	  <url-pattern>*.jsp</url-pattern>
+ </filter-mapping>
+
    <!-- 自定义标签 -->
 <jsp-config>
   

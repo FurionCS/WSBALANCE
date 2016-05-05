@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#passwordModal" data-toggle="modal"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;密码修改</a></li>
-                            <li><a href="LoginOut"><i class="icon-off"></i>&nbsp;&nbsp;&nbsp;退出</a></li>
+                            <li><a href="AdminAction_LoginOut"><i class="icon-off"></i>&nbsp;&nbsp;&nbsp;退出</a></li>
                         </ul>
                     <!-- END USER LOGIN DROPDOWN -->
                 </ul>

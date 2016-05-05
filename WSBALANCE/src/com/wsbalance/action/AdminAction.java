@@ -23,15 +23,19 @@ public class AdminAction extends ActionSupport implements SessionAware{
 	public Admin getAdmin() {
 		return admin;
 	}
-
+	/*private Map session=ActionContext.getContext().getSession();*/
 	public String checkAdmin(){
 		List<Admin> la=adminService.checkAdmin(admin);
 		if(la.size()>0){
-			session.put("login", la.get(0));
+			session.put("admin", la.get(0));
 			return "index";
 		}else{
 			return "login";
 		}
+	}
+	public String LoginOut(){
+		session.clear();
+		return "input";
 	}
 	private Map<String,Object> session;
 	@Override

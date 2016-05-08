@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="">工作记录</a>
                         </li> -->
                         <li id="menupage5_0">
-                            <a href="UserView/AdminList.jsp?active=menupage5_0">结算设定</a>
+                            <a href="Achievement/SetRange.jsp?active=menupage5_0">结算设定</a>
                         </li>
                         <li id="menupage5_1">
                             <a href="/Student/index?active=menupage5_1">业绩增加</a>

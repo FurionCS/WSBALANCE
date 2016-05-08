@@ -16,7 +16,9 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.wsbalance.pojo.Agent;
+import com.wsbalance.pojo.Page;
 import com.wsbalance.service.AgentService;
+import com.wsbalance.util.JsonUtil;
 
 @Controller
 public class AgentAction extends ActionSupport implements ServletResponseAware{
@@ -27,6 +29,14 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 	public Agent getAgent() {
 		return agent;
 	}
+	private Page page;
+	public Page getPage() {
+		return page;
+	}
+	public void setPage(Page page) {
+		this.page = page;
+	}
+	
 	@Autowired
 	private AgentService agentService;
 	
@@ -48,6 +58,27 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 		if(lg.size()>0){
 			jb.put("code", 1);
 			jb.put("agent", lg.get(0));
+		}else{
+			jb.put("code", 0);
+		}
+		PrintWriter out=response.getWriter();
+		out.print(jb);
+		return null;
+	}
+	public String getAgentByPage() throws IOException{
+		if(!page.getStrWhere().equals("")){
+			page.setStrWhere(" agpid=0 and (agwxnum like '%"+page.getStrWhere()+"%' or agname like '%"+page.getStrWhere()+"%' or agtel like '%"+page.getStrWhere()+"%')");
+		}else{
+			page.setStrWhere(" agpid=0");
+		}
+		List<Agent> lg=agentService.getAgentByPage(page);
+		int count=agentService.getAgentCount(page);
+		response.setCharacterEncoding("utf-8");
+		JSONObject jb =new JSONObject();
+		if(lg.size()>0){
+			jb.put("code", 1);
+			jb.put("lg", JsonUtil.listToJson(lg));
+			jb.put("count", count);
 		}else{
 			jb.put("code", 0);
 		}

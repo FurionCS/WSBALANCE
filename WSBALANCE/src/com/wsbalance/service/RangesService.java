@@ -19,5 +19,11 @@ public class RangesService {
 	public boolean deleteRange(Ranges range){
 		return rangesDao.deleteRange(range);
 	}
+	public boolean addRange(Ranges range){
+		return rangesDao.addRange(range);
+	}
+	public boolean updateRange(Ranges range){
+		return rangesDao.updateRange(range);
+	}
 	
 }

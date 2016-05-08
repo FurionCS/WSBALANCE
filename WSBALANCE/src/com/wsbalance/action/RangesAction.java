@@ -56,7 +56,21 @@ public class RangesAction extends ActionSupport implements ServletResponseAware{
 		out.print(jb);
 		return null;
 	}
-	
+	public String addRange(){
+		if(range.getRid()==0){
+			if(rangesService.addRange(range)){
+				return "addRange";
+			}else{
+				return "";
+			}
+		}else{
+			if(rangesService.updateRange(range)){
+				return "addRange";
+			}
+			else{return "";}
+		}
+		
+	}
 	private ServletResponse response;
 	@Override
 	public void setServletResponse(HttpServletResponse arg0) {

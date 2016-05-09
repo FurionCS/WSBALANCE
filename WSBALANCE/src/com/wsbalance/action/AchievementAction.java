@@ -48,7 +48,7 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 	public String addAchievement() throws IOException{
 		response.setCharacterEncoding("utf-8");
 		JSONObject jb =new JSONObject();
-		if(achievement.getAid()==0){
+		if(achievement.getAid()==-1){
 			if(achievementService.addAchievement(achievement)){
 				jb.put("code", 1);
 			}else{

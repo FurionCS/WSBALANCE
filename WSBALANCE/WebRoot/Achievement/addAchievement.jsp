@@ -154,7 +154,8 @@
         
         $("#money").change(function(){
         	var Fmoney=parseInt($("#Fmoney").val());
-        	var money=parseInt($(this).val())+Fmoney;
+        	var money=parseInt($(this).val());
+        	if(!isNaN(Fmoney)) money+=Fmoney;
         	  $.ajax({
    	            url: "RangesAction_getProportion",
    	            type: "POST",
@@ -199,7 +200,8 @@
 		}
         function SaveForm(){
         	var Fmoney=parseInt($("#Fmoney").val());
-        	var money=parseInt($("#money").val())+Fmoney;
+        	var money=parseInt($("#money").val())
+        	if(!isNaN(Fmoney)) money+=Fmoney;
         	var proportio=$("#proportio").val();
         	if(!checkIsDouble(money)){$("#spanMoney").val("请填写正常的金额类型");return false;}
         	else if(proportio==""){$("#spanMoney").val("您填写的业绩不在范围内");return false;}
@@ -210,7 +212,7 @@
         		 return false;
         	}
         	 var aid=parseInt($("#aid").val());
-        	if(aid==""){aid=-1;} 
+        	if(isNaN(aid)){aid=-1;} 
         	 $.ajax({
   	            url: "AchievementAction_addAchievement",
   	            type: "POST",

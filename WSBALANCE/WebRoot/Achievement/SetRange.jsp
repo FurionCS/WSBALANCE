@@ -82,8 +82,8 @@
  			str+='<span class="">--</span><div class="input-append"><input class="m-wrap span9 popovers" type="text"  name="range.maxnum"/><span class="add-on">元</span></div>';
  			str+='<div class="input-append"><input class="m-wrap span3 popovers" type="text" name="range.proportion"/><span class="add-on">%</span></div>';
  			str+='<input type="submit" class="btn blue" value="提交"/><button type="button" class="btn yellow">修改</button> </div><br> </form>';
- 			count++;
  			$("#formRanges").html($("#formRanges").html()+str);
+ 			count++;
  		}
  		function deleteForm(){
  			var length=$(".formRange").length;
@@ -100,6 +100,7 @@
  				})
  			} else{
  				formRange.remove();
+ 				count--;
  			}
  			
  		}

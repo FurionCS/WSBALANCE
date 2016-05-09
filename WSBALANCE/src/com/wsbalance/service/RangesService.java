@@ -25,5 +25,8 @@ public class RangesService {
 	public boolean updateRange(Ranges range){
 		return rangesDao.updateRange(range);
 	}
+	public double getProportion(double money){
+		return rangesDao.getProportion(money);
+	}
 	
 }

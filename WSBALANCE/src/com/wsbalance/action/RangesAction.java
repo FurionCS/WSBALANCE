@@ -71,6 +71,21 @@ public class RangesAction extends ActionSupport implements ServletResponseAware{
 		}
 		
 	}
+	public String getProportion() throws IOException{
+		//这里确定的一个数用range.minnum接收
+		double Proportion=rangesService.getProportion(range.getMinnum());
+		response.setCharacterEncoding("utf-8");
+		JSONObject jb =new JSONObject();
+		if(Proportion!=-1){
+			jb.put("code", 1);
+			jb.put("Proportion", Proportion);
+		}else{
+			jb.put("code", 0);
+		}
+		PrintWriter out=response.getWriter();
+		out.print(jb);
+		return null;
+	}
 	private ServletResponse response;
 	@Override
 	public void setServletResponse(HttpServletResponse arg0) {

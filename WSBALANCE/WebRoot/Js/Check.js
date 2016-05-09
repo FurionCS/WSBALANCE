@@ -7,6 +7,12 @@ function checkwx(wx){
 function chekcLevel(level){
 	return level.match(/^[0-9]*$/);
 }
+//判断是否为double的类型
+function checkIsDouble(strdouble){
+	var reg=/^[-\+]?\d+(\.\d+)?$/;
+	if(reg.test(strdouble)){return true;}
+	else return false;
+}
 //手机号验证
 function checkMobile(tel) {
     return !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);

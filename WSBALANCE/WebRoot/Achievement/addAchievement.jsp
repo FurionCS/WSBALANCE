@@ -37,24 +37,30 @@
                 </div>
                 <div class="portlet-body form">
                     <form action="#" id="InfoForm" class="form-horizontal" novalidate="novalidate">
-                        
+                    	<input name="aid" id="aid" value="" style="display:none"/>
+                       <div class="control-group">
+                            <label class="control-label">原有业绩&nbsp;</label>
+                            <div class="controls">
+                                <input type="text" name="Fmoney" id="Fmoney" class="span6 m-wrap popovers"  data-input="text" data-maxlength="250"  disabled/>
+                                <span style="color: red;" id="spanFMoney"></span>
+                            </div>
+                        </div>
                         <div class="control-group">
                             <label class="control-label">新增业绩&nbsp;</label>
                             <div class="controls">
-                                <input type="text" name="agauthorization" id="agauthorization" class="span6 m-wrap popovers" data-trigger="hover"  data-input="text" data-maxlength="250" required />
-                                <span style="color: red;" id="spanAgauthorization"></span>
+                                <input type="text" name="money" id="money" class="span6 m-wrap popovers"  data-input="text" data-maxlength="250" required />
+                                <span style="color: red;" id="spanMoney"></span>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">业绩比例&nbsp;</label>
                             <div class="controls">
-                              <div class="input-append"><input class="m-wrap span3 popovers" type="text" name="range.proportion" value="10" disabled/><span class="add-on">%</span></div>
-                                <span style="color: red;" id="spanAgauthorization"></span>
+                              <div class="input-append"><input id="proportio" class="m-wrap span3 popovers" type="text" name="range.proportion" value="" disabled/><span class="add-on">%</span></div>
+                                <span style="color: red;" id="spanProportio"></span>
                             </div>
                         </div>
                         <div class="form-actions">
-                            <a type="submit" class="btn green" href="javascript:void(0);" onclick="SaveForm();">保存</a>
-                            <a type="button" class="btn green" href="javascript:void(0);" onclick="Clear();">清空</a>
+                            <a type="submit" class="btn purple" href="javascript:void(0);" onclick="SaveForm();">添加</a>
                         </div>
                     </form>
                 </div>
@@ -145,6 +151,81 @@
             strSearch = this.value;
             getAgentList();
         }
+        
+        $("#money").change(function(){
+        	var Fmoney=parseInt($("#Fmoney").val());
+        	var money=parseInt($(this).val())+Fmoney;
+        	  $.ajax({
+   	            url: "RangesAction_getProportion",
+   	            type: "POST",
+   	            data: {"range.minnum": money},
+   	            dataType: "json",
+   	            success: function (result) { 
+   	            	if(result.code==1){
+   	            		$("#proportio").val(result.Proportion);
+   	            	}else{
+   	            	 noty({ text: "您设定的业绩不在范围内,请修改范围！", type: "warning", layout: "topCenter", timeout: 1000, modal: true }); 
+   	            	$("#proportio").val("");
+   	            	}
+   	            }
+        	  })
+        })
+        function checkItem(){
+        	var Agentid=$('input[name="AgentRadio"]:checked').val();
+        	 $.ajax({
+  	            url: "AchievementAction_getAchievementByAgent",
+  	            type: "POST",
+  	            data: {"achievement.agent.agid": Agentid},
+  	            dataType: "json",
+  	            success: function (result) {
+  	              if (result.code == 1) {
+  	            	 var data=result.achievement;
+  	              	$("#Fmoney").val(data.money);
+  	              	$("#proportio").val(data.proportion);
+  	              	$("#aid").val(data.aid);
+  	              }else{
+  	            	$("#Fmoney").val("");
+  	              	$("#proportio").val("");
+  	              }
+  	            }
+        	 })
+        }
+        
+        //判断是否为double的类型
+		function checkIsDouble(strdouble){
+			var reg=/^[-\+]?\d+(\.\d+)?$/;
+			if(reg.test(strdouble)){return true;}
+			else return false;
+		}
+        function SaveForm(){
+        	var Fmoney=parseInt($("#Fmoney").val());
+        	var money=parseInt($("#money").val())+Fmoney;
+        	var proportio=$("#proportio").val();
+        	if(!checkIsDouble(money)){$("#spanMoney").val("请填写正常的金额类型");return false;}
+        	else if(proportio==""){$("#spanMoney").val("您填写的业绩不在范围内");return false;}
+        	else $("#spanMoney").val("");
+        	var Agentid=$('input[name="AgentRadio"]:checked').val();
+        	if(Agentid==undefined){
+        		 noty({ text: "请选择业绩对象！", type: "warning", layout: "topCenter", timeout: 1000, modal: true }); 
+        		 return false;
+        	}
+        	 var aid=parseInt($("#aid").val());
+        	if(aid==""){aid=-1;} 
+        	 $.ajax({
+  	            url: "AchievementAction_addAchievement",
+  	            type: "POST",
+  	            data: {"achievement.aid": aid, "achievement.money": money, "achievement.proportion":proportio,"achievement.agent.agid":Agentid},
+  	            dataType: "json",
+  	            success: function (result) { 
+  	            	if(result.code==1){
+  	            		 noty({ text: "添加业绩成功！", type: "success", layout: "topCenter", timeout: 1000, modal: true }); 
+  	            		 Clear();
+  	            	}else{
+  	            		 noty({ text: "修改失败", type: "warning", layout: "topCenter", timeout: 1000, modal: true }); 
+  	            	}
+  	            }
+        	 })
+        }
  		 function getAgentList() {
  	        $.ajax({
  	            url: "AgentAction_getAgentByPage",
@@ -158,7 +239,7 @@
  	                    var data=result.lg;
  	                    for (var i = 0; i < data.length; i++) {            	
  	                        html += '<tr class="odd gradeX">';
- 	                        html += '<td class="sorting_1"><div ><span><input type="radio" onclick="checkItem(this);" name="AgentRadio" value=' + data[i].agid + '></span></div></td>';
+ 	                        html += '<td class="sorting_1"><div ><span><input type="radio" onclick="checkItem();" name="AgentRadio" value=' + data[i].agid + '></span></div></td>';
  	                        html += '<td class="hidden-480">' + data[i].agname+ '</td>';
  	                        html += '<td class="hidden-480">' + data[i].agwxnum + '</td>';
  	                        html += '<td class="hidden-480">' + data[i].agtel + '</td></tr>';
@@ -179,7 +260,7 @@
  	            }
  	        });
  	    }
-
+		
  	    function GetPageInfo(count) {
  	    	
  	        var pageHtml = "";
@@ -245,6 +326,10 @@
  	        if (0 < topage && topage <= pageCount)
  	            getArticleList();
  	    }
+ 		//清空
+	    function Clear() {
+	        $("#money").val("");
+	    }
  		</script>
  </Layout:overwrite>
 <%@ include file="/share/_Layout.jsp"%>

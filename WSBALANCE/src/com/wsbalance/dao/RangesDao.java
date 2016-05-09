@@ -22,6 +22,11 @@ public class RangesDao extends BaseDao{
 		return query.list();
 	}
 	
+	/**
+	 * 删除范围
+	 * @param range
+	 * @return
+	 */
 	public boolean deleteRange(Ranges range){
 		try{
 			getSession().delete(range);
@@ -31,6 +36,11 @@ public class RangesDao extends BaseDao{
 		}
 		return false;
 	}
+	/**
+	 * 增加一个范围
+	 * @param range
+	 * @return
+	 */
 	public boolean addRange(Ranges range){
 		try{
 			getSession().save(range);
@@ -40,6 +50,11 @@ public class RangesDao extends BaseDao{
 			return false;
 		}
 	}
+	/**
+	 * 更新范围
+	 * @param range
+	 * @return
+	 */
 	public boolean updateRange(Ranges range){
 		try{
 		Ranges ranges=(Ranges) getSession().load(Ranges.class, range.getRid());
@@ -50,6 +65,22 @@ public class RangesDao extends BaseDao{
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			return  false;
+		}
+	}
+	/**
+	 * 得到比例
+	 * @param money
+	 * @return
+	 */
+	public double getProportion(double money){
+		Query query=getSession().createQuery("from Ranges where minnum<? and maxnum>?");
+		query.setDouble(0, money);
+		query.setDouble(1, money);
+		List<Ranges> lr=query.list();
+		if(lr.size()>0){
+			return lr.get(0).getProportion();
+		}else{
+			return -1;
 		}
 	}
 

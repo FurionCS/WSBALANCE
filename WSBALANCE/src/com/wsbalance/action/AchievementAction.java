@@ -65,6 +65,21 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		out.print(jb);
 		return null;
 	}
+	public String getAchievementAll() throws IOException{
+		List<Achievement> la=achievementService.getAchievementAll();
+		response.setCharacterEncoding("utf-8");
+		JSONObject jb =new JSONObject();
+		if(la.size()>0){
+			jb.put("code", 1);
+			jb.put("la", JsonUtil.listToJson(la));
+			System.out.println(jb.get(la));
+		}else{
+			jb.put("code", 0);
+		}
+		PrintWriter out=response.getWriter();
+		out.print(jb);
+		return null;
+	}
 	private ServletResponse response;
 	@Override
 	public void setServletResponse(HttpServletResponse arg0) {

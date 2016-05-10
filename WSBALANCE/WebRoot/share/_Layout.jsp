@@ -2,7 +2,7 @@
 <%@ taglib uri="Mytag" prefix="Layout"%>
 <Layout:block name="import"></Layout:block>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,13 +24,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="Content/bootstrap/default.css" rel="stylesheet" type="text/css" />
 	<link href="Content/bootstrap/uniform.default.css" rel="stylesheet" type="text/css" />
 	<link href="Content/bootstrap/public.css" rel="stylesheet" type="text/css" />
-	<!-- <link href="Content/bootstrap/DT_bootstrap.css" rel="stylesheet" /> -->
+	 <!-- <link href="Content/bootstrap/DT_bootstrap.css" rel="stylesheet" /> -->
 	<link rel="shortcut icon" href="Content/image/favicon.ico"/>
-	
-	
+
+
 	<script src="Scripts/bootstrap/jquery-1.9.1.js" type="text/javascript"></script>
 	<script src="Scripts/bootstrap/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<!-- <script src="Scripts/bootstrap/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> -->
+	<script src="Scripts/bootstrap/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
 	<script src="Scripts/bootstrap/bootstrap.min.js" type="text/javascript"></script>
 	<script src="Scripts/bootstrap/jquery.slimscroll.min.js" type="text/javascript"></script>
 	<script src="Scripts/bootstrap/jquery.blockui.min.js" type="text/javascript"></script>
@@ -59,14 +59,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     <li class="dropdown user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="${login.get(0).getAHeadUrl()}"  style="width:28px;"/>                    
+                            <img src="Img/UserHead/myHead.jpg"  style="width:28px;"/>                    
                             <i class="icon-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#passwordModal" data-toggle="modal"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;密码修改</a></li>
                             <li><a href="AdminAction_LoginOut"><i class="icon-off"></i>&nbsp;&nbsp;&nbsp;退出</a></li>
                         </ul>
-                    <!-- END USER LOGIN DROPDOWN -->
+                    <!-- END USER L OGIN DROPDOWN -->
                 </ul>
             </div>
 
@@ -85,11 +85,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <span class="selected"></span>
                     </a>
                 </li>
-
                 <li id="menupage6">
                     <a href="javascript:;">
                         <i class="icon-male"></i>
-                        <span class="title">代理管理</span>
+                         <span class="title">代理管理</span>
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
@@ -125,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="Achievement/addAchievement.jsp?active=menupage5_1">业绩增加</a>
                         </li>
                         <li id="menupage5_2">
-                            <a href="Individual/Arrangement.jsp?active=menupage5_2">业绩查询</a>
+                            <a href="Achievement/AchievementList.jsp?active=menupage5_2">业绩查询</a>
                         </li>
                     </ul>
                 </li>
@@ -200,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
 
     </div>
-	    <script src="Scripts/bootstrap/noty/jquery.noty.js" type="text/javascript"></script>
+	 <script src="Scripts/bootstrap/noty/jquery.noty.js" type="text/javascript"></script>
     <script src="Scripts/bootstrap/noty/packaged/jquery.noty.packaged.js" type="text/javascript"></script>
      <script src="Scripts/bootstrap/noty/layouts/topCenter.js" type="text/javascript"></script>
      <script src="Scripts/bootstrap/noty/themes/default.js" type="text/javascript"></script>

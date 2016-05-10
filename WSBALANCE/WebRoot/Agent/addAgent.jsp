@@ -78,7 +78,7 @@
                             <div class="controls">
                                 <input type="text" name="agpwxnum" id="agpwxnum" class="span6 m-wrap popovers" data-trigger="hover" data-content="请填写代理上家" data-input="text" data-maxlength="250" required />
                                 <input type="text" id="agpid" style="display: none"/>
-                                <span style="color: red;" id="agpwxnum"></span>
+                                <span style="color: red;" id="spanAgpwxnum"></span>
                             </div>
                         </div>
                          <div class="control-group">
@@ -152,12 +152,10 @@
 			    else $("#spanAgauthorization").html("请输入代理授权码");
 			});
 			$("#agpwxnum").blur(function (e) {
-			    if (checkPwxnum(this.value)) {
-			        $("#spanAgpwxnum").html("");
-			    }
-			    else $("#spanAgpwxnum").html("请输入存在的上家");
+			    checkPwxnum(this.value);
 			});
 			function checkPwxnum(agpwxnum){
+				
 				var flag=false;
 				 $.ajax({
 			            url: "AgentAction_getAgentByAgwxnum",
@@ -168,9 +166,11 @@
 			            	if(result.code==1){
 			            		var agent=result.agent;
 			            		$("#agpid").val(agent.agid);
+			            		 $("#spanAgpwxnum").html("");
 			            		flag=true;
 			            	}else{
 			            		$("#agpid").val("");
+			            		$("#spanAgpwxnum").html("请输入存在的上家");
 			            	}
 			            }
 				 });

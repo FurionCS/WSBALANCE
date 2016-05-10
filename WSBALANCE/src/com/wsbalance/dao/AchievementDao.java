@@ -36,6 +36,11 @@ public class AchievementDao extends BaseDao{
 			return false;
 		}
 	}
+	/**
+	 * 更新业绩
+	 * @param achievement
+	 * @return
+	 */
 	public boolean updateAchievement(Achievement achievement){
 		try{
 			Achievement achieve=(Achievement) getSession().load(Achievement.class, achievement.getAid());
@@ -48,4 +53,9 @@ public class AchievementDao extends BaseDao{
 			return false;
 		}
 	}
+	
+	public List<Achievement> getAchievementAll(){
+		return getSession().createQuery("From Achievement").list();
+	}
+	
 }

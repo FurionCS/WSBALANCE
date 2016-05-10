@@ -23,5 +23,8 @@ public class AchievementService {
 	public boolean updateAchievement(Achievement achievement){
 		return achievementDao.updateAchievement(achievement);
 	}
+	public List<Achievement> getAchievementAll(){
+		return achievementDao.getAchievementAll();
+	}
 }
 

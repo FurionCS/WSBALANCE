@@ -409,7 +409,7 @@
       var $this = $(this)
         , target = $this.next(".branch")
         , href = $this.attr("href")
-        , option = $(target).data("tree") ? "toggle" : $this.data()
+        , option = $(target).data("tree") ? {toggle: "branch", value: "Bootstrap_Tree"} : $this.data()
         
       href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
       

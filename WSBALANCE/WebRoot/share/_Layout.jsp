@@ -50,13 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="navbar-inner">
             <div class="container-fluid" style="padding-left:0">
                 <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-                    
                 </a>
                 <ul class="nav pull-right">
                     <!-- END TODO DROPDOWN -->
-
                     <!-- BEGIN USER LOGIN DROPDOWN -->
-
                     <li class="dropdown user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="Img/UserHead/myHead.jpg"  style="width:28px;"/>                    
@@ -79,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="sidebar-toggler hidden-phone" style="margin-bottom: 10px;"></div>
                 </li>
                 <li class="start active">
-                    <a href="HomeView/Welcome.jsp">
+                    <a href="index.jsp">
                         <i class="icon-home"></i>
                         <span class="title">首页</span>
                         <span class="selected"></span>

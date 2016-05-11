@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.wsbalance.pojo.Achievement;
+import com.wsbalance.pojo.Page;
+import com.wsbalance.pojo.Performance;
 import com.wsbalance.service.AchievementService;
 import com.wsbalance.util.JsonUtil;
 
@@ -29,6 +31,13 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 	}
 	public Achievement getAchievement() {
 		return achievement;
+	}
+	private Page page;
+	public void setPage(Page page) {
+		this.page = page;
+	}
+	public Page getPage() {
+		return page;
 	}
 	
 	public String getAchievementByAgent() throws IOException{
@@ -79,6 +88,22 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		PrintWriter out=response.getWriter();
 		out.print(jb);
 		return null;
+	}
+	public String getPerformanceByPage() throws IOException{
+		List<Performance> lp=achievementService.getPerformanceByPage(page);
+		response.setCharacterEncoding("utf-8");
+		JSONObject jb =new JSONObject();
+		if(lp.size()>0){
+			jb.put("code", 1);
+			jb.put("lp", lp);
+			jb.put("count", achievementService.getAchievementCount(page));
+		}else{
+			jb.put("code", 0);
+		}
+		PrintWriter out=response.getWriter();
+		out.print(jb);
+		return null;
+		
 	}
 	private ServletResponse response;
 	@Override

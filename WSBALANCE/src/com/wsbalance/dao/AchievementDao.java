@@ -7,6 +7,8 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Service;
 
 import com.wsbalance.pojo.Achievement;
+import com.wsbalance.pojo.Page;
+import com.wsbalance.pojo.Performance;
 
 
 @Service
@@ -53,9 +55,16 @@ public class AchievementDao extends BaseDao{
 			return false;
 		}
 	}
-	
 	public List<Achievement> getAchievementAll(){
-		return getSession().createQuery("From Achievement").list();
+		return getSession().createQuery("from Achievement").list();
+	}
+	public List<Performance> getPerformanceByPage(Page page){
+		Query query=getSession().createSQLQuery("select * from V_WSBALANCE_PERFORMANCE Where agname like ? or agwxnum like ?");
+		return query.setString(0, "%"+page.getStrWhere()+"%").setString(1, "%"+page.getStrWhere()+"%").setFirstResult((page.getPageIndex() - 1) * page.getPageSize()).setMaxResults(page.getPageSize()).list();
+		
+	}
+	public int getAchievementCount(Page page){
+		return getSession().createSQLQuery("select * from V_WSBALANCE_PERFORMANCE Where agname like ? or agwxnum like ?").setString(0, "%"+page.getStrWhere()+"%").setString(1, "%"+page.getStrWhere()+"%").list().size();
 	}
 	
 }

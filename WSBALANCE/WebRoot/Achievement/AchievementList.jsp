@@ -59,15 +59,14 @@ I am title
                         <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th style="text-align: center">
+<!--                                 <th style="text-align: center">
                                     <input type="checkbox" id="chk_All" class="checkboxes" onclick="CheckAll(this)" />
                                 </th>
-                                <th>姓名</th>
+ -->                                <th>姓名</th>
                                 <th>微信号</th>
                                 <th>团队业绩</th>
                                 <th>团队奖金</th>
                                 <th>个人奖金</th>
-                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody id="ListBody">
@@ -107,7 +106,7 @@ I am title
                             </div>
                         </div>
                         <div class="span6">
-                            <div class="dataTables_paginate paging_bootstrap pagination">
+                            <div class="dataTables_paginate paging_bootstrap pagination" style="text-align: right;">
                                 <ul id="pagePart">
                                 </ul>
                             </div>
@@ -143,106 +142,46 @@ I am title
   </div>
 </div>
 </Layout:overwrite>
-<%-- <Layout:overwrite name="MyScript"></Layout:overwrite>
+ <Layout:overwrite name="MyScript">
 	<script>
-	/* var pageSize = 10; //一页显示的记录数
+	var pageSize = 10; //一页显示的记录数
     var pageIndex = 1; //当前页
     var PSize = 10;
     var orderby = "", strSearch = "";
     var count = 0;  //总记录数
     $(document).ready(function () {
-     getContactList();
+    	getPerformanceList();
         document.getElementById("pagesize").onchange = function () {
             if (this.value < 0) {
                 pageSize = count;
             } else
                 pageSize = this.value;
-            getContactList();
+            getPerformanceList();
         }
         document.getElementById("search").onkeyup = function () {
-            strSearch = this.value;
-            getContactList();
+            strSearch =this.value;
+            getPerformanceList();
         };
-        document.getElementById("delete").onclick = function () {
-            var lst = document.getElementsByClassName("checkboxes");
-            var str = "", shopnum = "";
-            for (var i = 1; i < lst.length; i++) {
-                if (lst[i].checked) {
-                    str += (str == "") ? lst[i].value : ("," + lst[i].value);
-                    shopnum += (shopnum == "") ? lst[i].title : ("," + lst[i].title);
-                }
-            }
-            
-            if (str.length > 0)
-                noty({
-                    text: '确定要删除这些信息吗',
-                    type: 'information',
-                    layout: 'center',
-                    buttons: [
-                        {
-                            addClass: 'btn blue', text: '确定', onClick: function ($noty) {
-                                $.ajax({
-                                    url: "com.Manager.Communication/DeleteContact",
-                                    type: "POST",
-                                    data: {
-                                        ids: str
-                                    },
-                                    dataType: "json",
-                                    success: function (result) {
-                                        if (result.code == 1) {
-                                        	alert(result.DeleteNum);
-                                            $noty.close();
-                                            noty({ text: result.msg, type: 'information', layout: 'center', timeout: 2000 });
-                                            getContactList();
-                                        }
-                                        else {
-                                            noty({ text: result.msg, type: 'warning', layout: 'center', timeout: 2000 });
-                                        }
-                                    },
-                                    error: function () {
-                                        noty({ text: "检查网络设置", type: 'warning', layout: 'center', timeout: 2000 });
-                                    }
-
-                                });
-
-                            }
-                        },
-                        {
-                            addClass: 'btn red', text: '取消', onClick: function ($noty) {
-                                $noty.close();
-                            }
-                        }
-                    ]
-                });
-        };
-
-
     });
-
-
-    function getContactList() {
+    function getPerformanceList() {
         $.ajax({
-            url: "com.Manager.Communication/GetContactByPage",
+            url: "AchievementAction_getPerformanceByPage",
             type: "POST",
-            data: { pageSize: pageSize, pageIndex: pageIndex, strSearch: strSearch},
+            data: { "page.pageSize": pageSize, "page.pageIndex": pageIndex, "page.strWhere": strSearch},
             dataType: "json",
-            success: function (result) {            	
+            success: function (result) {  
                 if (result.code == 1) {
-                    count = result.count;
+                    var count = result.count;
+                    var data=result.lp;
                     var html = "";
-                    var data=result.ContactList;          
                     for (var i = 0; i < data.length; i++) {
                         html += '<tr class="odd gradeX">';
-                        html += '<td class="sorting_1"><div class="checker"><span><input type="checkbox" onclick="checkItem(this);" class="checkboxes" value=' + data[i].ID + '></span></div></td>';
-                        html += '<td class="hidden-480">' + data[i].name+ '</td>';
-                        html += '<td class="hidden-480">' + data[i].sex + '</td>';
-                        html += '<td class="hidden-480">' + data[i].phone + '</td>';
-                        html += '<td class="hidden-480">' + data[i].email + '</td>';
-                        html += '<td class="hidden-480">' + data[i].QQ  + '</td>';
-                        html += '<td class="hidden-480">' + data[i].homeAddress + '</td>';
-                        html += '<td class="hidden-480">' + data[i].workAddress + '</td>';
-                        html += '<td class="hidden-480">' + data[i].code + '</td>';
-                        html += '<td class="hidden-480"><a href="./com.Manager.Communication/EditContact?ID=' + data[i].ID + '&active=menupage6_6" class="label label-important" style="color: white;">编辑</a></td>';
+                       /*  html += '<td class="sorting_1"><div class="checker"><span><input type="checkbox" onclick="checkItem(this);" class="checkboxes" value=' + data[i][0] + '></span></div></td>'; */
+                        html += '<td class="hidden-480">' + data[i][1]+ '</td>';
+                        html += '<td class="hidden-480">' + data[i][2] + '</td>';
+                        html += '<td class="hidden-480">' + data[i][3] + '</td>';
+                        html += '<td class="hidden-480">' + data[i][4] + '</td>';
+                        html += '<td class="hidden-480">' + data[i][5]  + '</td></tr>';
                       
                     }
                     $("#ListBody").html(html);
@@ -327,10 +266,7 @@ I am title
         if (0 < topage && topage <= pageCount)
             getContactList();
     }
-	 */
-	
-    </script> --%>
-	
-	
+    </script> 
+</Layout:overwrite>	
 	
 <%@ include file="/share/_Layout.jsp"%>

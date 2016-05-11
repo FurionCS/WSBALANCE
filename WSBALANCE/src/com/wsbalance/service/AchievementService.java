@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.wsbalance.dao.AchievementDao;
 import com.wsbalance.pojo.Achievement;
-import com.wsbalance.pojo.Agent;
+import com.wsbalance.pojo.Page;
+import com.wsbalance.pojo.Performance;
 
 
 @Service
@@ -23,8 +24,15 @@ public class AchievementService {
 	public boolean updateAchievement(Achievement achievement){
 		return achievementDao.updateAchievement(achievement);
 	}
+	
+	public List<Performance> getPerformanceByPage(Page page){
+		return achievementDao.getPerformanceByPage(page);
+	}
 	public List<Achievement> getAchievementAll(){
 		return achievementDao.getAchievementAll();
+	}
+	public int getAchievementCount(Page page){
+		return achievementDao.getAchievementCount(page);
 	}
 }
 

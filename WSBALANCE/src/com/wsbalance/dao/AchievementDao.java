@@ -1,9 +1,14 @@
 package com.wsbalance.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.ScrollableResults;
 import org.springframework.stereotype.Service;
 
 import com.wsbalance.pojo.Achievement;
@@ -58,13 +63,38 @@ public class AchievementDao extends BaseDao{
 	public List<Achievement> getAchievementAll(){
 		return getSession().createQuery("from Achievement").list();
 	}
+	/**
+	 * 得到处理过的业绩通过分页
+	 * @param page
+	 * @return
+	 */
 	public List<Performance> getPerformanceByPage(Page page){
 		Query query=getSession().createSQLQuery("select * from V_WSBALANCE_PERFORMANCE Where agname like ? or agwxnum like ?");
 		return query.setString(0, "%"+page.getStrWhere()+"%").setString(1, "%"+page.getStrWhere()+"%").setFirstResult((page.getPageIndex() - 1) * page.getPageSize()).setMaxResults(page.getPageSize()).list();
 		
 	}
+	/**
+	 * 得到业绩数量
+	 * @param page
+	 * @return
+	 */
 	public int getAchievementCount(Page page){
 		return getSession().createSQLQuery("select * from V_WSBALANCE_PERFORMANCE Where agname like ? or agwxnum like ?").setString(0, "%"+page.getStrWhere()+"%").setString(1, "%"+page.getStrWhere()+"%").list().size();
 	}
-	
+	/**
+	 * 得到处理过的业绩表所有记录
+	 * @return
+	 */
+	public List<Performance> getPerformanceAll(){
+			List<Performance> lp=new ArrayList<Performance>();
+			List list=getSession().createSQLQuery("select * from V_WSBALANCE_PERFORMANCE").list();
+			Iterator it=list.iterator();
+			while(it.hasNext()){
+				Object[] obj=(Object[]) it.next();
+				Performance p=new Performance(Integer.parseInt(String.valueOf(obj[0])),(String)obj[1],(String)obj[2],Double.parseDouble(String.valueOf(obj[3])),Double.parseDouble(String.valueOf(obj[4])),Double.parseDouble(String.valueOf(obj[5])));
+				lp.add(p);
+			}
+		
+		return lp;
+	}
 }

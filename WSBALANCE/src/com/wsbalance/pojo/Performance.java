@@ -1,12 +1,28 @@
 package com.wsbalance.pojo;
 
-public class Performance {
+import java.io.Serializable;
+
+public class Performance implements Serializable{
 	private int agid;
 	private String agname;
 	private String agwxnum;
 	private double money;
 	private double team;
 	private double personmoney;
+	
+	public Performance() {
+		super();
+	}
+	public Performance(int agid, String agname, String agwxnum, double money,
+			double team, double personmoney) {
+		super();
+		this.agid = agid;
+		this.agname = agname;
+		this.agwxnum = agwxnum;
+		this.money = money;
+		this.team = team;
+		this.personmoney = personmoney;
+	}
 	public int getAgid() {
 		return agid;
 	}

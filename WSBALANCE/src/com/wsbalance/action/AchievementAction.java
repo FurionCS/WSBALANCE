@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -18,6 +19,8 @@ import com.wsbalance.pojo.Achievement;
 import com.wsbalance.pojo.Page;
 import com.wsbalance.pojo.Performance;
 import com.wsbalance.service.AchievementService;
+import com.wsbalance.util.ExcelJxl;
+import com.wsbalance.util.ExeclUtil;
 import com.wsbalance.util.JsonUtil;
 
 @Controller
@@ -98,6 +101,31 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 			jb.put("lp", lp);
 			jb.put("count", achievementService.getAchievementCount(page));
 		}else{
+			jb.put("code", 0);
+		}
+		PrintWriter out=response.getWriter();
+		out.print(jb);
+		return null;
+		
+	}
+	public String DownPerformanceToExcel() throws IOException{
+		response.setCharacterEncoding("utf-8");
+		JSONObject jb =new JSONObject();
+		try{
+		List<Performance> lp=achievementService.getPerformanceAll();
+		String[][] body=new String[lp.size()][5];
+		for(int i=0;i<lp.size();i++){
+			body[i][0]=lp.get(i).getAgname();
+			body[i][1]=lp.get(i).getAgwxnum();
+			body[i][2]=Double.toString(lp.get(i).getMoney());
+			body[i][3]=Double.toString(lp.get(i).getTeam());
+			body[i][4]=Double.toString(lp.get(i).getPersonmoney());
+		}
+		String[] title = {"姓名","微信号","团队业绩","团队奖金","个人奖金"};
+		ExcelJxl.JXLWrite(title, body);
+		jb.put("code", 1);
+		}catch(Exception e){
+			System.out.println("");
 			jb.put("code", 0);
 		}
 		PrintWriter out=response.getWriter();

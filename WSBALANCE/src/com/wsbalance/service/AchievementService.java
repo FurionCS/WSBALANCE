@@ -34,5 +34,8 @@ public class AchievementService {
 	public int getAchievementCount(Page page){
 		return achievementDao.getAchievementCount(page);
 	}
+	public List<Performance> getPerformanceAll(){
+		return achievementDao.getPerformanceAll();
+	}
 }
 

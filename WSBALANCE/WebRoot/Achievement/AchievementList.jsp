@@ -32,7 +32,7 @@ I am title
                     <div class="portlet-body">
                         <div class="clearfix">
                             <div class="btn-group">
-                                <a id="excel" href="com.Manager.Communication/DownloadExcel" type="button" class="btn yellow">导出Excel <i class="icon-bar-chart"></i>
+                                <a id="excel" href="javascript:void(0)" onclick="downExcel()" type="button" class="btn yellow">导出Excel <i class="icon-bar-chart"></i>
                                 </a>
                             </div>
                            
@@ -163,6 +163,20 @@ I am title
             getPerformanceList();
         };
     });
+    function downExcel(){
+    	  $.ajax({
+              url: "AchievementAction_DownPerformanceToExcel",
+              type: "POST",
+              dataType: "json",
+              success: function (result) { 
+            	  if(result.code==1){
+            		  noty({ text: "导出成功！", type: "success", layout: "topCenter", timeout: 1000, modal: true }); 
+            	  }else{
+            		  noty({ text: "导出失败！", type: "warning", layout: "topCenter", timeout: 1000, modal: true }); 
+            	  }
+              }
+    	  })
+    }
     function getPerformanceList() {
         $.ajax({
             url: "AchievementAction_getPerformanceByPage",

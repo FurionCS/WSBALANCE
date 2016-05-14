@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a href="Achievement/SetRange.jsp?active=menupage5_0">结算设定</a>
                         </li>
                         <li id="menupage5_1">
-                            <a href="Achievement/addAchievement.jsp?active=menupage5_1">业绩增加</a>
+                            <a href="Achievement/AddAchieve.jsp?active=menupage5_1">业绩增加</a>
                         </li>
                         <li id="menupage5_2">
                             <a href="Achievement/AchievementList.jsp?active=menupage5_2">业绩查询</a>
@@ -249,20 +249,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 return;
             }
             $.ajax({
-                url: "com.Manager.Home/ChangePassword",
+                url: "AdminAction_updatePassword",
                 type: "post",
                 dataType: "json",
-                data: { "OldPassword": txtOldPassword, "NewPassword": txtNewPassword },
+                data: { "admin.adpassword": txtOldPassword, "newpassword": txtNewPassword },
                 success: function (data) {
                     if (data.code == 1) {
-                        $("#passwordMessage").text(data.msg);
-                        window.setTimeout("window.location='com.Manager.Home/LoginOut'", 3000);
+                        $("#passwordMessage").text("修改成功");
+                        window.setTimeout("window.location='AdminAction_LoginOut'", 3000);
                     }
                     else if(data.code==0){
-                        $("#passwordMessage").text(data.msg);
+                        $("#passwordMessage").text("修改失败");
                     }
                     else{
-                    	$("#passwordMessage").text(data.msg);
+                    	$("#passwordMessage").text("原密码不对！！");
                     }
                 },
                 error: function () {

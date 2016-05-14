@@ -37,5 +37,8 @@ public class AchievementService {
 	public List<Performance> getPerformanceAll(){
 		return achievementDao.getPerformanceAll();
 	}
+	public boolean deleteAllAchievement(){
+		return achievementDao.deleteAllAchievement();
+	}
 }
 

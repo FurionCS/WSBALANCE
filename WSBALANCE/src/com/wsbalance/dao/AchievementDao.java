@@ -54,11 +54,11 @@ public class AchievementDao extends BaseDao{
 			achieve.setMoney(achievement.getMoney());
 			achieve.setProportion(achievement.getProportion());
 			achieve.setLasttime(new Date());
-			return true;
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			return false;
 		}
+		return true;
 	}
 	public List<Achievement> getAchievementAll(){
 		return getSession().createQuery("from Achievement").list();
@@ -96,5 +96,18 @@ public class AchievementDao extends BaseDao{
 			}
 		
 		return lp;
+	}
+	/**
+	 * 删除
+	 * @return
+	 */
+	public boolean deleteAllAchievement(){
+		try{
+		getSession().createSQLQuery("delete from T_WSBALANCE_ACHIEVEMENT where 1=1").executeUpdate();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 }

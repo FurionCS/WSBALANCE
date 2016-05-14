@@ -16,4 +16,7 @@ public class AdminService {
 	public List<Admin> checkAdmin(Admin admin){
 		return adminDao.checkAdmin(admin);
 	}
+	public boolean updatePassword(Admin admin){
+		return adminDao.updatePassword(admin);
+	}
 }

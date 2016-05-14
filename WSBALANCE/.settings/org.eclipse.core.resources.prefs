@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebRoot/Achievement/AchievementList.jsp=UTF-8
+encoding//WebRoot/Achievement/AddAchieve.jsp=UTF-8
 encoding//WebRoot/Achievement/SetRange.jsp=UTF-8
 encoding//WebRoot/Achievement/addAchievement.jsp=UTF-8
 encoding//WebRoot/Agent/AgentTree.jsp=UTF-8
@@ -20,3 +21,4 @@ encoding//WebRoot/Scripts/kindeditor-4.1.10/lang/zh_TW.js=UTF-8
 encoding//WebRoot/TagExample.jsp=UTF-8
 encoding//WebRoot/index.jsp=UTF-8
 encoding//WebRoot/share/_Layout.jsp=UTF-8
+encoding/WebRoot=UTF-8

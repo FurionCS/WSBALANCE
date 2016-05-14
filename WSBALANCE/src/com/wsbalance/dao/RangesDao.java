@@ -73,7 +73,7 @@ public class RangesDao extends BaseDao{
 	 * @return
 	 */
 	public double getProportion(double money){
-		Query query=getSession().createQuery("from Ranges where minnum<? and maxnum>?");
+		Query query=getSession().createQuery("from Ranges where minnum<=? and maxnum>?");
 		query.setDouble(0, money);
 		query.setDouble(1, money);
 		List<Ranges> lr=query.list();

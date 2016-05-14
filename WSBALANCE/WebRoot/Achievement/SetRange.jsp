@@ -81,7 +81,7 @@
  			str+='	<div class="input-append"><input class="m-wrap span9 popovers" type="text" name="range.minnum" /><span class="add-on">元</span></div>';
  			str+='<span class="">--</span><div class="input-append"><input class="m-wrap span9 popovers" type="text"  name="range.maxnum"/><span class="add-on">元</span></div>';
  			str+='<div class="input-append"><input class="m-wrap span3 popovers" type="text" name="range.proportion"/><span class="add-on">%</span></div>';
- 			str+='<input type="submit" class="btn blue" value="提交"/><button type="button" class="btn yellow">修改</button> </div><br> </form>';
+ 			str+='<input type="submit" class="btn blue" value="提交"/></div><br> </form>';
  			$("#formRanges").html($("#formRanges").html()+str);
  			count++;
  		}
@@ -163,7 +163,7 @@
 		            		html+='	<div class="input-append"><input class="m-wrap span9 popovers" type="text" value="'+lr[i].minnum+'" name="range.minnum"/><span class="add-on">元</span></div>';
 		            		html+='<span class="">--</span><div class="input-append"><input class="m-wrap span9 popovers" type="text"  value="'+lr[i].maxnum+'" name="range.maxnum"/><span class="add-on">元</span></div>';
 		            		html+='<div class="input-append"><input class="m-wrap span3 popovers" type="text" value="'+ lr[i].proportion+'" name="range.proportion"/><span class="add-on">%</span></div>';
-		            		html+='<input type="submit" class="btn blue" value="提交"/><button type="button" class="btn yellow">修改</button> </div> <br></form>';
+		            		html+='<input type="submit" class="btn blue" value="提交"/> </div> <br></form>';
 		            		count++;
 	            		}
 	            		$("#formRanges").html(html);

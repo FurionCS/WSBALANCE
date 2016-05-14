@@ -20,7 +20,6 @@ import com.wsbalance.pojo.Page;
 import com.wsbalance.pojo.Performance;
 import com.wsbalance.service.AchievementService;
 import com.wsbalance.util.ExcelJxl;
-import com.wsbalance.util.ExeclUtil;
 import com.wsbalance.util.JsonUtil;
 
 @Controller
@@ -57,9 +56,10 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		out.print(jb);
 		return null;
 	}
-	public String addAchievement() throws IOException{
+	public String addAchieve() throws IOException{
 		response.setCharacterEncoding("utf-8");
 		JSONObject jb =new JSONObject();
+		try{
 		if(achievement.getAid()==-1){
 			if(achievementService.addAchievement(achievement)){
 				jb.put("code", 1);
@@ -72,11 +72,28 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 			}else{
 				jb.put("code", 0);
 			}
+		}}catch(Exception e){
+			System.out.println(e.getMessage());
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
 		return null;
 	}
+	
+	public String addOneAchievement(){
+		System.out.println("addOneAchievementvfvvvvvvvvvvvvvvvvvvvvvvvvv");
+		try{
+			if(achievement.getAid()==-1){
+				achievementService.addAchievement(achievement);
+			}else{
+				achievementService.updateAchievement(achievement);
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
 	public String getAchievementAll() throws IOException{
 		List<Achievement> la=achievementService.getAchievementAll();
 		response.setCharacterEncoding("utf-8");
@@ -131,7 +148,22 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		PrintWriter out=response.getWriter();
 		out.print(jb);
 		return null;
-		
+	}
+	
+	
+	public String deleteAllAchievement() throws IOException{
+		response.setCharacterEncoding("utf-8");
+		JSONObject jb =new JSONObject();
+		try{
+			achievementService.deleteAllAchievement();
+			jb.put("code", 1);
+		}catch(Exception e){
+			jb.put("code", 0);
+			
+		}
+		PrintWriter out=response.getWriter();
+		out.print(jb);
+		return null;
 	}
 	private ServletResponse response;
 	@Override

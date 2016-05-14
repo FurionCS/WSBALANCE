@@ -35,6 +35,10 @@ I am title
                                 <a id="excel" href="javascript:void(0)" onclick="downExcel()" type="button" class="btn yellow">导出Excel <i class="icon-bar-chart"></i>
                                 </a>
                             </div>
+                            <div class="btn-group">
+                                <a id="delete" href="javascript:void(0)" onclick="deleteALL()" type="button" class="btn red">清空 <i class="icon-trash"></i>
+                                </a>
+                            </div>
                            
                         </div>
                         <div class="row-fluid">
@@ -176,6 +180,41 @@ I am title
             	  }
               }
     	  })
+    }
+    function deleteALL(){
+    	noty({
+            text: '过程不可逆,请查看是否导出?',
+            type: 'information',
+            layout: 'center',
+            buttons: [
+                {
+                    addClass: 'btn blue', text: '确定', onClick: function ($noty) {
+			    	  $.ajax({
+			              url: "AchievementAction_deleteAllAchievement",
+			              type: "POST",
+			              dataType: "json",
+			              success: function (result) {  
+			            	  if (result.code == 1) {
+			            		  $noty.close();
+			            		  noty({ text: "清空成功！", type: "success", layout: "topCenter", timeout: 1000, modal: true }); 
+			            		  getPerformanceList();
+			            	  }
+			            	  else{
+			            		  $noty.close();
+			            		  noty({ text: "清空失败！", type: "success", layout: "topCenter", timeout: 1000, modal: true }); 
+			            	  }
+			              }
+			    	  })
+                    }
+                },
+                {
+                    addClass: 'btn red', text: '取消', onClick: function ($noty) {
+                        $noty.close();
+                    }
+                }
+            ]
+        });
+    	  
     }
     function getPerformanceList() {
         $.ajax({

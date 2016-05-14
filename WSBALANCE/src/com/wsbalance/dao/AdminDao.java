@@ -16,4 +16,10 @@ public class AdminDao extends BaseDao{
 		List<Admin> la=query.list();
 		return la;
 	}
+	public boolean updatePassword(Admin admin){
+		Admin adm=(Admin) getSession().get(Admin.class, admin.getAdid());
+		adm.setAdpassword(admin.getAdpassword());
+		return true;
+		
+	}
 }

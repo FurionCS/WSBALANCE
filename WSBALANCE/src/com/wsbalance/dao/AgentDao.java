@@ -1,5 +1,6 @@
 package com.wsbalance.dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -55,5 +56,68 @@ public class AgentDao extends BaseDao{
 	 */
 	public int getAgentCount(Page page){
 		return getSession().createQuery("From Agent where "+page.getStrWhere()+" order by "+page.getOrderby()).list().size();
+	}
+	/**
+	 * 更新下属代理数量
+	 * @param id
+	 * @param isupdate
+	 * @return
+	 */
+	public boolean updateagcount(int id,boolean isupdate){
+		Agent agent=(Agent) getSession().load(Agent.class, id);
+		if(isupdate){
+		agent.setAgcount(agent.getAgcount()+1);
+		}else{
+			if(agent.getAgcount()>0){
+			agent.setAgcount(agent.getAgcount()-1);
+			}
+		}
+		return true;
+	}
+	/**
+	 * 得到代理
+	 * @param id
+	 * @return
+	 */
+	public Agent getAgentByID(int id){
+		return (Agent)getSession().get(Agent.class, id);
+	}
+	/**
+	 * 通过夫id 得到下属代理
+	 * @param pid
+	 * @return
+	 */
+	public List<Agent> findHAgent(int pid){
+		try{
+			Query query=getSession().createQuery("from Agent where agpid=?");
+			query.setInteger(0, pid);
+			return query.list();
+		}catch(Exception e){
+			System.out.println(e.getMessage()); 
+			return null;
+		}
+	}
+	/**
+	 * 得到所有代理
+	 * @return
+	 */
+	public List<Agent> getAgentAllOrderBy(){
+		try{
+			Query query=getSession().createQuery("from Agent order by agpid ");
+			return query.list();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	public List<Agent> getAgentByagpid(int agpid){
+		try{
+			Query query=getSession().createQuery("from Agent where agpid=?");
+			query.setInteger(0, agpid);
+			return query.list();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 }

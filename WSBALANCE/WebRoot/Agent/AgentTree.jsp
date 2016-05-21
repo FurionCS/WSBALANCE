@@ -1,11 +1,9 @@
-
 <%@ taglib uri="Mytag" prefix="Layout"%>
 <Layout:overwrite name="title">
 代理树型图
 </Layout:overwrite>
  <Layout:overwrite name="Mycss">
- <link href="Css/jquery.treeview.css" rel="stylesheet" type="text/css" />
- <link href="Css/screen.css" rel="stylesheet" type="text/css" />
+ 	<link rel="stylesheet" href="Css/zTreeStyle.css" type="text/css">
  </Layout:overwrite>
 
  <Layout:overwrite name="MyContent">
@@ -43,30 +41,7 @@
                     </div>
                 </div>
                 <div class="portlet-body form">
-                    <ul id="browser" class="filetree">
-		<li><i class="icon-group"></i><span class="">Folder 1</span>
-			<ul>
-				<li><i class="icon-male"></i>Item 1.1</li>
-			</ul>
-		</li>
-		<li><i class="icon-group"></i><span class="">Folder 2</span>
-			<ul>
-				<li><i class="icon-group"></i><span class="">Subfolder 2.1</span>
-					<ul id="folder21">
-						<li>  <i class="icon-male"></i>File 2.1.1</li>
-						<li><i class="icon-male"></i>File 2.1.2</li>
-					</ul>
-				</li>
-				<li><i class="icon-male"></i>File 2.2</li>
-			</ul>
-		</li>
-		<li class="closed"><i class="icon-group"></i><span class="">Folder 3 (closed at start)</span>
-			<ul>
-				<li><i class="icon-male"></i>File 3.1</li>
-			</ul>
-		</li>
-		<li><i class="icon-male"></i>File 3.1</li>
-	</ul>		
+        			<ul id="treeDemo" class="ztree"></ul>
                 </div>
             </div>
         </div>
@@ -75,18 +50,37 @@
 			
 </Layout:overwrite>
 <Layout:overwrite name="MyScript">
-<script src="Js/jquery.cookie.js" type="text/javascript"></script>
-<script src="Js/jquery.treeview.js"></script>
-<script src="Js/demo.js"></script>
+<script src="Js/jquery.ztree.core.js"></script>
 <script type="text/javascript">
+<!--
+var setting = {
+	data: {
+		simpleData: {
+			enable: true
+		}
+	}
+	,async: {
+		enable: true,
+		url:"AgentAction_getAgentTreeData",
+		autoParam:["id", "name","level"],
+		dataFilter: filter
+	}
+};
+function filter(treeId, parentNode, childNodes) {
+	if (!childNodes) return null;
+	for (var i=0, l=childNodes.length; i<l; i++) {
+		childNodes[i].name = childNodes[i].name.replace('','');
+	}
+	return childNodes;
+}
+var zNodes =[
+	{ id:0, pId:-1, name:"总公司",isParent:true}	
+];
+
 $(document).ready(function(){
- 
- $("#navigation").treeview({
-  persist: "location",
-  collapsed: true,
-  unique: true
- });
+	$.fn.zTree.init($("#treeDemo"), setting,zNodes);
 });
+//-->
 </script>
 </Layout:overwrite>
 <%@ include file="/share/_Layout.jsp"%>

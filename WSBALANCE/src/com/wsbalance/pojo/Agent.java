@@ -17,6 +17,8 @@ public class Agent {
 	private String agauthorization;  //授权号
 	private Date agcreateday;     //录入时间
 	private String agpassword;    //代理密码
+	private int agstatus;           //代理状态1为在职，0为不在
+	private int agcount;     //下属代理数量
 	public int getAgid() {
 		return agid;
 	}
@@ -77,8 +79,18 @@ public class Agent {
 	public void setAgpassword(String agpassword) {
 		this.agpassword = agpassword;
 	}
-	
-	
+	public void setAgstatus(int agstatus) {
+		this.agstatus = agstatus;
+	}
+	public int getAgstatus() {
+		return agstatus;
+	}
+	public void setAgcount(int agcount) {
+		this.agcount = agcount;
+	}
+	public int getAgcount() {
+		return agcount;
+	}
 	
 	
 	

@@ -2,12 +2,16 @@ package com.wsbalance.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -36,7 +40,28 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 	public void setPage(Page page) {
 		this.page = page;
 	}
+	private int id;
+	private String name;
+	private int level;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	@Autowired
 	private AgentService agentService;
 	
@@ -45,6 +70,7 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 		response.setCharacterEncoding("utf-8");
 		JSONObject jb =new JSONObject();
 		if(agentService.addAgent(agent)){
+			agentService.updateagcount(agent.getAgpid(), true);
 			jb.put("code", 1);
 		}else{jb.put("code", 0);};
 		PrintWriter out=response.getWriter();
@@ -84,6 +110,37 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		return null;
+	}
+	public String getAgentTreeData() throws IOException{
+		JSONObject json =new JSONObject();
+		response.setCharacterEncoding("utf-8");
+		List<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
+		List<Agent> lg=agentService.getAgentByagpid(id);
+		for(int i = 0;i < lg.size(); i ++){
+			HashMap<String,Object> hm = new HashMap<String,Object>();   //最外层，父节点           
+			hm.put("id", lg.get(i).getAgid());
+			if(lg.get(i).getAglevel()==0){
+			hm.put("name", lg.get(i).getAgname()+"(总代)");
+			}else{
+				hm.put("name", lg.get(i).getAgname()+"("+lg.get(i).getAglevel()+"级代理)");
+			}
+			hm.put("pId",id);
+			if(lg.get(i).getAgcount()>0){
+				hm.put("isParent", true);
+			}else{
+				hm.put("isParent", false);
+			}
+			list.add(hm);
+		}	
+		JSONArray arr = new JSONArray().fromObject(list);
+		try {
+			json.put("success", true);
+			json.put("arr", arr);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		response.getWriter().write(arr.toString());
 		return null;
 	}
 	private ServletResponse response;

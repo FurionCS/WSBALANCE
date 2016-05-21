@@ -27,4 +27,16 @@ public class AgentService {
 	public int getAgentCount(Page page){
 		return agentDao.getAgentCount(page);
 	}
+	public boolean updateagcount(int id,boolean isupdate){
+		return agentDao.updateagcount(id, isupdate);
+	}
+	public Agent getAgentByID(int id){
+		return agentDao.getAgentByID(id);
+	}
+	public List<Agent> findHAgent(int pid){
+		return agentDao.findHAgent(pid);
+	}
+	public List<Agent> getAgentByagpid(int agpid){
+		return agentDao.getAgentByagpid(agpid);
+	}
 }

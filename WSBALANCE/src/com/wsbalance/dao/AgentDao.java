@@ -112,7 +112,7 @@ public class AgentDao extends BaseDao{
 	}
 	public List<Agent> getAgentByagpid(int agpid){
 		try{
-			Query query=getSession().createQuery("from Agent where agpid=?");
+			Query query=getSession().createQuery("from Agent where agpid=? order by aglevel");
 			query.setInteger(0, agpid);
 			return query.list();
 		}catch(Exception e){

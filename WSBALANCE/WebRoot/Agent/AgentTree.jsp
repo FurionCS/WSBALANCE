@@ -74,7 +74,7 @@ function filter(treeId, parentNode, childNodes) {
 	return childNodes;
 }
 var zNodes =[
-	{ id:0, pId:-1, name:"总公司",isParent:true}	
+	{ id:0, pId:-1, name:"总公司",isParent:true,iconOpen:"Css/img/diy/1_open.png", iconClose:"Css/img/diy/1_close.png"}	
 ];
 
 $(document).ready(function(){

@@ -128,8 +128,10 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 			hm.put("pId",id);
 			if(lg.get(i).getAgcount()>0){
 				hm.put("isParent", true);
+				hm.put("icon", "Css/img/diy/10.png");
 			}else{
 				hm.put("isParent", false);
+				hm.put("icon", "Css/img/diy/11.png");
 			}
 			list.add(hm);
 		}	

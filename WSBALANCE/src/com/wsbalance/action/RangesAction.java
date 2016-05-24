@@ -39,6 +39,8 @@ public class RangesAction extends ActionSupport implements ServletResponseAware{
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 		
 	}
@@ -54,6 +56,8 @@ public class RangesAction extends ActionSupport implements ServletResponseAware{
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 	}
 	public String addRange(){
@@ -84,6 +88,8 @@ public class RangesAction extends ActionSupport implements ServletResponseAware{
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 	}
 	private ServletResponse response;

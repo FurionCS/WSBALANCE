@@ -23,8 +23,7 @@ import com.wsbalance.pojo.Admin;
  * @version1.0
  *
  */
-public class CheckLoginFilter implements Filter { 
-	 
+public class CheckLoginFilter implements Filter { 	 
 	 protected FilterConfig filterConfig = null; 
 	 private String redirectURL = null; 
 	 private List notCheckURLList = new ArrayList();  
@@ -76,7 +75,6 @@ public class CheckLoginFilter implements Filter {
 	  */
 	 public void init(FilterConfig filterConfig) throws ServletException 
 	 { 
-		 System.out.println("/////////////////////////");
 	  this.filterConfig = filterConfig; 
 	  redirectURL = filterConfig.getInitParameter("redirectURL"); //获得重定向地址
 	  sessionKey = filterConfig.getInitParameter("checkSessionKey");//获得关键字

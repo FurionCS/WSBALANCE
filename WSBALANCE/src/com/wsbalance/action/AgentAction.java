@@ -75,6 +75,7 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 		}else{jb.put("code", 0);};
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();out.close();
 		return null;
 	}
 	public String getAgentByAgwxnum() throws IOException{
@@ -89,6 +90,7 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();out.close();
 		return null;
 	}
 	public String getAgentByPage() throws IOException{
@@ -110,6 +112,7 @@ public class AgentAction extends ActionSupport implements ServletResponseAware{
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();out.close();
 		return null;
 	}
 	public String getAgentTreeData() throws IOException{

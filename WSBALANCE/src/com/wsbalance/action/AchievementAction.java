@@ -54,6 +54,8 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 	}
 	public String addAchieve() throws IOException{
@@ -77,6 +79,8 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 	}
 	
@@ -107,6 +111,8 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 	}
 	public String getPerformanceByPage() throws IOException{
@@ -122,6 +128,8 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 		
 	}
@@ -147,6 +155,8 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 	}
 	
@@ -163,6 +173,8 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		return null;
 	}
 	private ServletResponse response;

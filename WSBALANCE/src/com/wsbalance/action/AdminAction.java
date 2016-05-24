@@ -70,6 +70,8 @@ public class AdminAction extends ActionSupport implements SessionAware,ServletRe
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);
+		out.flush();
+		out.close();
 		 return null;
 	}
 	private Map<String,Object> session;

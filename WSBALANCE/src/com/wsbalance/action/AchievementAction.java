@@ -85,7 +85,6 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 	}
 	
 	public String addOneAchievement(){
-		System.out.println("addOneAchievementvfvvvvvvvvvvvvvvvvvvvvvvvvv");
 		try{
 			if(achievement.getAid()==-1){
 				achievementService.addAchievement(achievement);

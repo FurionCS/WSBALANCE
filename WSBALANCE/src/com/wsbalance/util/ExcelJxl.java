@@ -16,7 +16,7 @@ public class ExcelJxl {
 	public static void JXLWrite(String[] title,String[][] body){
 		Date date=new Date();
 		String Filename="业绩表"+date.getTime()+".xls";
-		File file = new File("e:/"+Filename);
+		File file = new File("C:/Users/Administrator/Desktop/"+Filename);
 		try {
 			file.createNewFile();
 			//创建工作簿
@@ -45,7 +45,6 @@ public class ExcelJxl {
 			//写入数据
 			workbook.write();
 			workbook.close();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

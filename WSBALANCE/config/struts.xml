@@ -14,7 +14,8 @@
 			<result name="index" type="redirect" >/index.jsp</result>
 			<result name="AgentTree" type="redirect">Agent/AgentTree.jsp</result>
 			<result name="addAgent" type="redirect">/Agent/addAgent.jsp</result>
-			<result name="addRange" type="redirect">/Achievement/SetRange.jsp?active=menupage5_1</result>
+			<result name="addRange" type="redirect">/Achievement/SetRange.jsp?active=menupage5_0</result>
+			<result name="editagent" type="redirect">/Agent/EditAgent.jsp?active=menupage6_5</result>
 		</action>
       
     </package>

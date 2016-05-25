@@ -39,4 +39,7 @@ public class AgentService {
 	public List<Agent> getAgentByagpid(int agpid){
 		return agentDao.getAgentByagpid(agpid);
 	}
+	public boolean changeAgent(Agent agent){
+		return agentDao.changeAgent(agent);
+	}
 }

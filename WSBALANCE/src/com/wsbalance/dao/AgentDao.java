@@ -1,6 +1,5 @@
 package com.wsbalance.dao;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -110,6 +109,13 @@ public class AgentDao extends BaseDao{
 			return null;
 		}
 	}
+	
+	
+	/**
+	 * 得到代理通过父id
+	 * @param agpid
+	 * @return
+	 */
 	public List<Agent> getAgentByagpid(int agpid){
 		try{
 			Query query=getSession().createQuery("from Agent where agpid=? order by aglevel");
@@ -119,5 +125,22 @@ public class AgentDao extends BaseDao{
 			System.out.println(e.getMessage());
 			return null;
 		}
+	}
+	
+	
+	public boolean changeAgent(Agent agent){
+		try{
+		Agent ag=(Agent) getSession().load(Agent.class, agent.getAgid());
+		ag.setAgname(agent.getAgname());
+		ag.setAgidcard(agent.getAgidcard());
+		ag.setAglevel(agent.getAglevel());
+		ag.setAgstatus(agent.getAgstatus());
+		ag.setAgauthorization(agent.getAgauthorization());
+		ag.setAgtel(agent.getAgtel());
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 }

@@ -95,9 +95,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				<li id="menupage6_0">
                             <a href="Agent/addAgent.jsp?active=menupage6_0">增加代理</a>
                         </li> 
-                        <!-- <li id="menupage6_5">
-                            <a href="CommunicationView/Addone.jsp?active=menupage6_5">板块详细信息</a>
-                        </li>   -->
+                    <li id="menupage6_5">
+                            <a href="Agent/AgentList.jsp?active=menupage6_5">代理列表</a>
+                        </li> 
                     </ul>
                 </li>
                 

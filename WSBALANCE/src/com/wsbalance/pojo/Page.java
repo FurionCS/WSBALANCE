@@ -4,9 +4,8 @@ public class Page {
 	private int ID;
 	private int pageSize=5;
 	private int pageIndex;
-	private String strWhere=" aglevel=0";
-	private String orderby=" agid desc";
-	
+	private String strWhere="";
+	private String orderby=" agid asc";
 	public int getID() {
 		return ID;
 	}

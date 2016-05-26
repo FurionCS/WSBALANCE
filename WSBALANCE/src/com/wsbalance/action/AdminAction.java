@@ -46,7 +46,7 @@ public class AdminAction extends ActionSupport implements SessionAware,ServletRe
 			session.put("admin", la.get(0));
 			return "index";
 		}else{
-			return "login";
+			return "input";
 		}
 	}
 	public String LoginOut(){

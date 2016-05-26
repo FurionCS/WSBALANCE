@@ -2,7 +2,10 @@
 <Layout:overwrite name="title">
 增加代理
 </Layout:overwrite>
-<%-- <Layout:overwrite name="Mycss"></Layout:overwrite> --%>
+<Layout:overwrite name="Mycss">
+<link href="Content/bootstrap/datepicker.css" rel="stylesheet" />
+<link href="Content/bootstrap/datetimepicker.css" rel="stylesheet" />
+</Layout:overwrite>
 
 <Layout:overwrite name="MyContent">
 	<div class="row-fluid">
@@ -58,7 +61,6 @@
                                 <span style="color: red;" id="spanAgidcard"></span>
                             </div>
                         </div>
-                        
                         <div class="control-group">
                             <label class="control-label">*电话&nbsp;</label>
                             <div class="controls">
@@ -95,6 +97,23 @@
                                 <span style="color: red;" id="spanAgauthorization"></span>
                             </div>
                         </div>
+                         <div class="control-group">
+                            <label class="control-label">授权结束时间</label>
+                            <div class="controls">
+                                <input type="text" name="itemAuthor" id="endTime" class="span6 m-wrap popovers" data-trigger="hover" data-content="请选择大于当前的日期" data-input="text" data-maxlength="250" required />
+                                <span style="color: red;" id="spanEndTime"></span>
+                            </div>
+                        </div>
+                          <div class="control-group">
+                            <label class="control-label">类型&nbsp;</label>
+                            <div class="controls">
+                            	 <select id="type" class="small m-wrap" tabindex="1">
+										<option value="2">个人</option>
+										<option value="1">个体户</option>
+										<option value="0">公司</option>
+								</select>
+                            </div>
+                        </div>
                         <div class="form-actions">
                             <a type="submit" class="btn green" href="javascript:void(0);" onclick="SaveForm();">保存</a>
                             <a type="button" class="btn green" href="javascript:void(0);" onclick="Clear();">清空</a>
@@ -106,8 +125,16 @@
     </div>
 </Layout:overwrite>
 <Layout:overwrite name="MyScript">
+    <script src="Scripts/bootstrap/bootstrap-datepicker.js"></script>
+    <script src="Scripts/bootstrap/bootstrap-datetimepicker.min.js"></script>
+    <script src="Scripts/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script type="text/javascript" src="Js/Check.js"></script>
 	<script>
+	  $('#endTime').datetimepicker({
+          minView: "month",
+          format: 'yyyy-mm-dd',
+          language: 'zh-CN'
+      });
 			$("#agname").keyup(function (e) {
 			    if (checkCName(this.value)) {
 			        $("#spanAgname").html("");
@@ -155,7 +182,6 @@
 			    checkPwxnum(this.value);
 			});
 			function checkPwxnum(agpwxnum){
-				
 				var flag=false;
 				 $.ajax({
 			            url: "AgentAction_getAgentByAgwxnum",
@@ -199,10 +225,14 @@
 				 else{ $("#spanAglevel").html("请输入0以上的正整数");return false;};
 				var agauthorization=$("#agauthorization").val().trim();
 				 if(agauthorization==""){$("#spanAgauthorization").html("请填写授权码");return false;}
+				 var endTime = $("#endTime").val();
+				 if(endTime==""){$("#spanEndTime").html("请选择授权截止时间");return ;}
+				 else{$("#spanEndTime").html("");}
+				var agtype=$("#type").val();
 		        $.ajax({
 		            url: "AgentAction_addAgent",
 		            type: "POST",
-		            data: {"agent.agname": agname,"agent.agwxnum": agwxnum,"agent.agidcard": agidcard,"agent.agtel": agtel,"agent.agpassword": agpassword,"agent.aglevel": aglevel,"agent.agpid": agpid,"agent.agauthorization": agauthorization},
+		            data: {"agent.agname": agname,"agent.agwxnum": agwxnum,"agent.agidcard": agidcard,"agent.agtel": agtel,"agent.agpassword": agpassword,"agent.aglevel": aglevel,"agent.agpid": agpid,"agent.agauthorization": agauthorization,"agent.agdeadline":endTime,"agent.agtype":agtype},
 		            dataType: "json",
 		            success: function (result) {
 		            	if (result.code == 1) {

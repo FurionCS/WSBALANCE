@@ -56,16 +56,11 @@
  </filter-mapping>
 
    <!-- 自定义标签 -->
-<jsp-config>
-  
+<jsp-config>  
     <taglib>
-
         <taglib-uri>/Mytag</taglib-uri>
-
         <taglib-location>/WEB-INF/Mytag.tld</taglib-location>
-
-    </taglib>
-	
+    </taglib>	
 	  <jsp-property-group>   
 	  <description>   
 	  Special property group for JSP Configuration HTML   

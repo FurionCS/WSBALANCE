@@ -13,14 +13,14 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home"></i>
-                    <a href="/Home/Index">首页</a>
+                    <a href="index.jsp">首页</a>
                     <i class="icon-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">代理管理</a><i class="icon-angle-right"></i>
+                    <a href="javascript:void(0)">代理管理</a><i class="icon-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/Student/add">代理增加</a></i>
+                    <a href="javascript:void(0)">代理增加</a></i>
                 </li>
             </ul>
         </div>

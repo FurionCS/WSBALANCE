@@ -13,6 +13,7 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -20,6 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wsbalance.pojo.Admin;
 import com.wsbalance.service.AdminService;
 
+@Scope("prototype")
 @Controller
 public class AdminAction extends ActionSupport implements SessionAware,ServletResponseAware{
 	@Autowired

@@ -1,15 +1,26 @@
 package com.wsbalance.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -21,6 +32,7 @@ import com.wsbalance.pojo.Page;
 import com.wsbalance.pojo.Performance;
 import com.wsbalance.service.AchievementService;
 import com.wsbalance.util.ExcelJxl;
+import com.wsbalance.util.ExportUtils;
 import com.wsbalance.util.JsonUtil;
 
 @Scope("prototype")
@@ -132,11 +144,10 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		out.flush();
 		out.close();
 		return null;
-		
 	}
-	public String DownPerformanceToExcel() throws IOException{
+	/*public String getInputStream() throws IOException{
 		response.setCharacterEncoding("utf-8");
-		JSONObject jb =new JSONObject();
+	 JSONObject jb =new JSONObject();
 		try{
 		List<Performance> lp=achievementService.getPerformanceAll();
 		String[][] body=new String[lp.size()][5];
@@ -148,20 +159,34 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 			body[i][4]=Double.toString(lp.get(i).getPersonmoney());
 		}
 		String[] title = {"姓名","微信号","团队业绩","团队奖金","个人奖金"};
-		ExcelJxl.JXLWrite(title, body);
-		jb.put("code", 1);
 		}catch(Exception e){
 			System.out.println("");
 			jb.put("code", 0);
+			PrintWriter out=response.getWriter();
+			out.print(jb);
+			out.flush();
+			out.close();
+			return null;
 		}
-		PrintWriter out=response.getWriter();
-		out.print(jb);
+	
+		return null;
+		
+	}
+	*/
+	public void downexcel() throws IOException{
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;filename=Achievement.xls");
+		HSSFWorkbook  wb=new HSSFWorkbook();
+		HSSFSheet sheet=wb.createSheet("sheet0");
+		String[] title = {"姓名","微信号","团队业绩","团队奖金","个人奖金"};
+		List<Performance> lp=achievementService.getPerformanceAll();
+		ExportUtils.outputHeaders(title, sheet);
+		ExportUtils.outputColumns(title, lp, sheet, 1);
+		ServletOutputStream out=response.getOutputStream();
+		wb.write(out);
 		out.flush();
 		out.close();
-		return null;
 	}
-	
-	
 	public String deleteAllAchievement() throws IOException{
 		response.setCharacterEncoding("utf-8");
 		JSONObject jb =new JSONObject();
@@ -178,7 +203,12 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		out.close();
 		return null;
 	}
-	private ServletResponse response;
+	@Override
+	public String execute() throws Exception {
+		// TODO Auto-generated method stub
+		return "success";
+	}
+	private HttpServletResponse response;
 	@Override
 	public void setServletResponse(HttpServletResponse arg0) {
 		response=arg0;

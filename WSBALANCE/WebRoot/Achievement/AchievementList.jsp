@@ -32,7 +32,7 @@
                     <div class="portlet-body">
                         <div class="clearfix">
                             <div class="btn-group">
-                                <a id="excel" href="javascript:void(0)" onclick="downExcel()" type="button" class="btn yellow">导出Excel <i class="icon-bar-chart"></i>
+                                <a id="excel" href="AchievementAction_downexcel" onclick="" type="button" class="btn yellow">导出Excel <i class="icon-bar-chart"></i>
                                 </a>
                             </div>
                             <div class="btn-group">
@@ -50,7 +50,6 @@
                                             <option value="10" selected="selected">10</option>
                                             <option value="20">20</option>
                                             <option value="-1">All</option>
-
                                         </select> 条记录每页</label>
                                 </div>
                             </div>
@@ -74,34 +73,6 @@
                             </tr>
                         </thead>
                         <tbody id="ListBody">
-								<%-- <%
-									ArrayList ContactList=(ArrayList)session.getAttribute("ContactList");
-									if(ContactList==null || ContactList.size()==0){
-								%>
-								<tr class='odd gradeX'><td colspan='10' style='text-align:center'>抱歉，还没有任何信息</td></tr>
-								<% 
-									}
-									else{
-										for(int i=ContactList.size()-1;i>=0;i--){
-											ContactBean CB=(ContactBean)ContactList.get(i);
-											%>
-											<tr class="odd gradeX">
-											<td class="sorting_1"><div class="checker"><span><input type="checkbox" onclick="checkItem(this);" class="checkboxes" value="<%=CB.getID() %>"></span></div></td>
-											<td class="hidden-480"><%=CB.getName() %></td>
-											<td class="hidden-480"><%=CB.getSex() %></td>
-											<td class="hidden-480"><%=CB.getPhone() %></td>
-											<td class="hidden-480"><%=CB.getEmail() %></td>
-											<td class="hidden-480"><%=CB.getQQ() %></td>
-											<td class="hidden-480"><%=CB.getHomeAdress() %></td>
-											<td class="hidden-480"><%=CB.getWorkAdress()%></td>
-											<td class="hidden-480"><%=CB.getCode() %></td>
-											<td class="hidden-480"><a href="./com.Manager.Communication/EditContact?ID=<%=CB.getID()%>"class="label label-important" style="color: white;">编辑</a></td>
-											<% 
-										}
-										
-									}
-									
-								%> --%>
                         </tbody>
                     </table>
                     <div class="row-fluid">
@@ -169,7 +140,7 @@
     });
     function downExcel(){
     	  $.ajax({
-              url: "AchievementAction_DownPerformanceToExcel",
+              url: "AchievementAction_export",
               type: "POST",
               dataType: "json",
               success: function (result) { 
@@ -180,7 +151,7 @@
             	  }
               }
     	  })
-    }
+    } 
     function deleteALL(){
     	noty({
             text: '过程不可逆,请查看是否导出?',

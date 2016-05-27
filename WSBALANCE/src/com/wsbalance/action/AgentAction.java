@@ -181,7 +181,6 @@ public class AgentAction extends ActionSupport implements SessionAware,ServletRe
 	}
 	
 	public String changeAgent() throws IOException{
-		System.out.println("vvvvvvvv");
 		response.setCharacterEncoding("utf-8");
 		JSONObject jb =new JSONObject();
 		if(agentService.changeAgent(agent)){

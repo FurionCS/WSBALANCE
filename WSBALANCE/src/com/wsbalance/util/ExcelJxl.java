@@ -1,6 +1,8 @@
 package com.wsbalance.util;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Date;
 
 import jxl.Workbook;
@@ -9,11 +11,8 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
 
-
-
-
 public class ExcelJxl {
-	public static void JXLWrite(String[] title,String[][] body){
+	public static String JXLWrite(String[] title,String[][] body){
 		Date date=new Date();
 		String Filename="业绩表"+date.getTime()+".xls";
 		File file = new File("C:/Users/Administrator/Desktop/"+Filename);
@@ -48,5 +47,6 @@ public class ExcelJxl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return "C:/Users/Administrator/Desktop/"+Filename;
 	}
 }

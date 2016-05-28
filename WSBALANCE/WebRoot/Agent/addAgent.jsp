@@ -232,7 +232,7 @@
 		        $.ajax({
 		            url: "AgentAction_addAgent",
 		            type: "POST",
-		            data: {"agent.agname": agname,"agent.agwxnum": agwxnum,"agent.agidcard": agidcard,"agent.agtel": agtel,"agent.agpassword": agpassword,"agent.aglevel": aglevel,"agent.agpid": agpid,"agent.agauthorization": agauthorization,"agent.agdeadline":endTime,"agent.agtype":agtype},
+		            data: {"agent.agname": agname,"agent.agwxnum": agwxnum,"agent.agidcard": agidcard,"agent.agtel": agtel,"agent.agpassword": agpassword,"agent.aglevel": aglevel,"agent.agpid": agpid,"agent.agauthorization": agauthorization,"agent.agdeadline":endTime,"agent.agtype":agtype,"agent.agstatus":1},
 		            dataType: "json",
 		            success: function (result) {
 		            	if (result.code == 1) {

@@ -326,7 +326,7 @@
  	   function GotoPage(topage) {
  	        pageIndex = topage;
  	        if (0 < topage && topage <= pageCount)
- 	            getArticleList();
+ 	        	getAgentList();
  	    }
  		//清空
 	    function Clear() {

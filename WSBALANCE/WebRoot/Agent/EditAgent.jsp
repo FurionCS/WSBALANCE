@@ -99,7 +99,6 @@
             </div>
         </div>
     </div>
-    <s:debug></s:debug>
 </Layout:overwrite>
 <Layout:overwrite name="MyScript">
 <script type="text/javascript" src="Js/Check.js"></script>

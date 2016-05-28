@@ -1,26 +1,16 @@
 package com.wsbalance.action;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,7 +21,6 @@ import com.wsbalance.pojo.Achievement;
 import com.wsbalance.pojo.Page;
 import com.wsbalance.pojo.Performance;
 import com.wsbalance.service.AchievementService;
-import com.wsbalance.util.ExcelJxl;
 import com.wsbalance.util.ExportUtils;
 import com.wsbalance.util.JsonUtil;
 
@@ -173,6 +162,13 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		
 	}
 	*/
+	/**
+	 * 使用的包有：
+	 * poi-3.2-FINAL-20081019.jar
+	 *poi-contrib-3.2-FINAL-20081019.jar
+	 *poi-scratchpad-3.2-FINAL-20081019.jar
+	 * @throws IOException
+	 */
 	public void downexcel() throws IOException{
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;filename=Achievement.xls");

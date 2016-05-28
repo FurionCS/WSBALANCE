@@ -12,7 +12,7 @@
                         <div class="clearfix">
                            
                             <div class="btn-group">
-                                <a id="addhref" href="CommunicationView/EditShortMessage.jsp?active=menupage6_0"type="button" class="btn green">添加<i class="icon-edit"></i>
+                                <a id="addhref" href="Agent/addAgent.jsp?active=menupage6_0"type="button" class="btn green">添加<i class="icon-edit"></i>
                                 </a>
                              
                             </div>

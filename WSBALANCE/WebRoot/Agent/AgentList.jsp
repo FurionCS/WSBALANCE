@@ -31,7 +31,7 @@
                             </div>
                             <div class="span6" style="text-align: right;">
                                 <div class="dataTables_filter" id="sample_1_filter">
-                                    <label>检索: <input type="text" aria-controls="sample_1" class="m-wrap small" id="search" style="height:30px;" placeholder="姓名,微信号,电话.."></label>
+                                    <label>检索: <input type="text" aria-controls="sample_1" class="m-wrap small" id="search" style="height:30px;" placeholder="姓名,微信号"></label>
                                 </div>
                             </div>
                         </div>

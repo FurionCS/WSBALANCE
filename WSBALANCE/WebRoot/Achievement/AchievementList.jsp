@@ -11,7 +11,7 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home"></i>
-                        <a href="/Home/Index">首页</a>
+                        <a href="index.jsp">首页</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
@@ -49,7 +49,6 @@
                                             <option value="5">5</option>
                                             <option value="10" selected="selected">10</option>
                                             <option value="20">20</option>
-                                            <option value="-1">All</option>
                                         </select> 条记录每页</label>
                                 </div>
                             </div>
@@ -80,7 +79,7 @@
                             <div id="pageInfo" class="dataTables_info">
                             </div>
                         </div>
-                        <div class="span6">
+                        <div class="span6" style="margin-top:-25px;">
                             <div class="dataTables_paginate paging_bootstrap pagination" style="text-align: right;">
                                 <ul id="pagePart">
                                 </ul>
@@ -288,7 +287,7 @@
     function GotoPage(topage) {
         pageIndex = topage;
         if (0 < topage && topage <= pageCount)
-            getContactList();
+        	getPerformanceList();
     }
     </script> 
 </Layout:overwrite>	

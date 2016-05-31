@@ -8,7 +8,7 @@
     
         <!-- SQL dialect -->  
         <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>  
-        
+     <!--    <property name="current_session_context_class">thread</property> -->
    		<!-- open the second-level cache   -->
      <!--    <property name="cache.use_second_level_cache">true</property>
         <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>  

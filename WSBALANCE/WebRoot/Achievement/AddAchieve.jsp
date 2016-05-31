@@ -119,7 +119,7 @@
                             <div id="pageInfo" class="dataTables_info">
                             </div>
                         </div>
-                        <div class="span6">
+                        <div class="span6" style="text-align: right; margin-top:-20px;">
                             <div class="dataTables_paginate paging_bootstrap pagination">
                                 <ul id="pagePart">
                                 </ul>

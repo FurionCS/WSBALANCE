@@ -65,19 +65,19 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		response.setCharacterEncoding("utf-8");
 		JSONObject jb =new JSONObject();
 		try{
-		if(achievement.getAid()==-1){
+		/*if(achievement.getAid()==-1){*/
 			if(achievementService.addAchievement(achievement)){
 				jb.put("code", 1);
 			}else{
 				jb.put("code", 0);
 			}
-		}else{
+		/*}else{
 			if(achievementService.updateAchievement(achievement)){;
 				jb.put("code", 1);
 			}else{
 				jb.put("code", 0);
 			}
-		}}catch(Exception e){
+		}*/}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
 		PrintWriter out=response.getWriter();
@@ -174,7 +174,7 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		response.setHeader("Content-Disposition", "attachment;filename=Achievement.xls");
 		HSSFWorkbook  wb=new HSSFWorkbook();
 		HSSFSheet sheet=wb.createSheet("sheet0");
-		String[] title = {"姓名","微信号","团队业绩","团队奖金","个人奖金"};
+		String[] title = {"姓名","微信号","团队业绩","团队奖金","个人业绩","个人奖金"};
 		List<Performance> lp=achievementService.getPerformanceAll();
 		ExportUtils.outputHeaders(title, sheet);
 		ExportUtils.outputColumns(title, lp, sheet, 1);

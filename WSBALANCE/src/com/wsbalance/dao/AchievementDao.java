@@ -36,7 +36,12 @@ public class AchievementDao extends BaseDao{
 	 */
 	public boolean addAchievement(Achievement achievement){
 		try{
-			getSession().save(achievement);
+			/*getSession().save(achievement);*/
+			Query query=getSession().createSQLQuery("{call updateAchievementAll(?,?,?)}");
+			query.setInteger(0, achievement.getAgent().getAgid());
+			query.setDouble(1, achievement.getMoney());
+			query.setDouble(2, achievement.getProportion());
+			query.executeUpdate();
 			return true;
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -91,7 +96,7 @@ public class AchievementDao extends BaseDao{
 			Iterator it=list.iterator();
 			while(it.hasNext()){
 				Object[] obj=(Object[]) it.next();
-				Performance p=new Performance(Integer.parseInt(String.valueOf(obj[0])),(String)obj[1],(String)obj[2],Double.parseDouble(String.valueOf(obj[3])),Double.parseDouble(String.valueOf(obj[4])),Double.parseDouble(String.valueOf(obj[5])));
+				Performance p=new Performance(Integer.parseInt(String.valueOf(obj[0])),(String)obj[1],(String)obj[2],Double.parseDouble(String.valueOf(obj[3])),Double.parseDouble(String.valueOf(obj[4])),Double.parseDouble(String.valueOf(obj[5])),Double.parseDouble(String.valueOf(obj[6])));
 				lp.add(p);
 			}
 		

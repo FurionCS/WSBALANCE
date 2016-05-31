@@ -66,8 +66,10 @@
                                 </th>
  -->                                <th>姓名</th>
                                 <th>微信号</th>
+                                
                                 <th>团队业绩</th>
                                 <th>团队奖金</th>
+                                <th>个人业绩</th>
                                 <th>个人奖金</th>
                             </tr>
                         </thead>
@@ -123,6 +125,7 @@
     var PSize = 10;
     var orderby = "", strSearch = "";
     var count = 0;  //总记录数
+    var pageCount=0;
     $(document).ready(function () {
     	getPerformanceList();
         document.getElementById("pagesize").onchange = function () {
@@ -204,12 +207,14 @@
                         html += '<td class="hidden-480">' + data[i][2] + '</td>';
                         html += '<td class="hidden-480">' + data[i][3] + '</td>';
                         html += '<td class="hidden-480">' + data[i][4] + '</td>';
+                        html += '<td class="hidden-480">' + data[i][6] + '</td>';
                         html += '<td class="hidden-480">' + data[i][5]  + '</td></tr>';
                       
                     }
                     $("#ListBody").html(html);
                 }
                 else {
+                	count=0;
                     var html = "";
                     html += "<tr class='odd gradeX'>";
                     html += "<td colspan='10' style='text-align:center'>抱歉，还没有任何信息</td>";

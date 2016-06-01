@@ -199,9 +199,9 @@
 			else return false;
 		}
         function Save(){
-        	var Fmoney=parseInt($("#Fmoney").val());
+        	//var Fmoney=parseInt($("#Fmoney").val());
         	var money=parseInt($("#money").val())
-        	if(!isNaN(Fmoney)) money+=Fmoney;
+        	//if(!isNaN(Fmoney)) money+=Fmoney;
         	var proportio=$("#proportio").val();
         	if(!checkIsDouble(money)){$("#spanMoney").val("请填写正常的金额类型");return false;}
         	else if(proportio==""){$("#spanMoney").val("您填写的业绩不在范围内");return false;}
@@ -221,6 +221,9 @@
   	            success: function (result) { 
   	            	if(result.code==1){
   	            		 noty({ text: "添加业绩成功！", type: "success", layout: "topCenter", timeout: 1000, modal: true }); 
+  	            		var Fmoney=parseInt($("#Fmoney").val());
+  	            		if(!isNaN(Fmoney)) Fmoney+=money;
+  	            		$("#Fmoney").val(Fmoney);
   	            		 Clear();
   	            	}else{
   	            		 noty({ text: "修改失败", type: "warning", layout: "topCenter", timeout: 1000, modal: true }); 

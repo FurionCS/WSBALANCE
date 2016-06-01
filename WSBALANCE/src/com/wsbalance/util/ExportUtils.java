@@ -37,8 +37,8 @@ public class ExportUtils {
 				row.createCell(1).setCellValue(p.getAgwxnum());
 				row.createCell(2).setCellValue(p.getMoney());
 				row.createCell(3).setCellValue(p.getTeam());
-				row.createCell(4).setCellValue(p.getMoneyperson());
-				row.createCell(5).setCellValue(p.getPersonmoney());
+				row.createCell(4).setCellValue(p.getPersonmoney());
+				row.createCell(5).setCellValue(p.getMoneyperson());
 			//}
 		}
 		

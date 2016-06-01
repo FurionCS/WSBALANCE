@@ -99,9 +99,9 @@ public class AgentAction extends ActionSupport implements SessionAware,ServletRe
 	}
 	public String getAgentByPage() throws IOException{
 		if(!page.getStrWhere().equals("")){
-			page.setStrWhere(" aglevel=0 and (agwxnum like '%"+page.getStrWhere()+"%' or agname like '%"+page.getStrWhere()+"%' or agtel like '%"+page.getStrWhere()+"%')");
+			page.setStrWhere(" aglevel=0 and agstatus=1 and (agwxnum like '%"+page.getStrWhere()+"%' or agname like '%"+page.getStrWhere()+"%' or agtel like '%"+page.getStrWhere()+"%')");
 		}else{
-			page.setStrWhere(" aglevel=0");
+			page.setStrWhere(" aglevel=0 and agstatus=1");
 		}
 		List<Agent> lg=agentService.getAgentByPage(page);
 		int count=agentService.getAgentCount(page);

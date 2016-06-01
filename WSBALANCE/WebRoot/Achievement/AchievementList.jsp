@@ -189,6 +189,7 @@
         });
     	  
     }
+   
     function getPerformanceList() {
         $.ajax({
             url: "AchievementAction_getPerformanceByPage",
@@ -207,8 +208,8 @@
                         html += '<td class="hidden-480">' + data[i][2] + '</td>';
                         html += '<td class="hidden-480">' + data[i][3] + '</td>';
                         html += '<td class="hidden-480">' + data[i][4] + '</td>';
-                        html += '<td class="hidden-480">' + data[i][6] + '</td>';
-                        html += '<td class="hidden-480">' + data[i][5]  + '</td></tr>';
+                        html += '<td class="hidden-480">' + data[i][5] + '</td>';
+                        html += '<td class="hidden-480">' + data[i][6]  + '</td></tr>';
                       
                     }
                     $("#ListBody").html(html);

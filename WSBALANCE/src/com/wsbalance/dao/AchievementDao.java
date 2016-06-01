@@ -74,7 +74,7 @@ public class AchievementDao extends BaseDao{
 	 * @return
 	 */
 	public List<Performance> getPerformanceByPage(Page page){
-		Query query=getSession().createSQLQuery("select * from V_WSBALANCE_PERFORMANCE Where agname like ? or agwxnum like ?");
+		Query query=getSession().createSQLQuery("select * from V_WSBALANCE_PERFORMANCE Where aglevel=0 and agstatus=1 and (agname like ? or agwxnum like ?)");
 		return query.setString(0, "%"+page.getStrWhere()+"%").setString(1, "%"+page.getStrWhere()+"%").setFirstResult((page.getPageIndex() - 1) * page.getPageSize()).setMaxResults(page.getPageSize()).list();
 		
 	}

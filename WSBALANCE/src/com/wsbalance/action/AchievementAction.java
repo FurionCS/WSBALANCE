@@ -111,6 +111,7 @@ public class AchievementAction extends ActionSupport implements ServletResponseA
 		}else{
 			jb.put("code", 0);
 		}
+		
 		PrintWriter out=response.getWriter();
 		out.print(jb);
 		out.flush();

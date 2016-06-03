@@ -2,16 +2,96 @@
 一：管理员后台系统需求
 1：管理员登录，密码修改
 2：微商组织结构树型图
-3：代理增删改查
+3：代理增删改查 
 4：业绩奖金比例设定
 5：总代业绩增加功能，通过选择总代，显示出总代当前的业绩和奖金比例饿，添加新增业绩，可以根据原业绩加新业绩，结合业绩奖金比例，得出该总代的业绩比例
-6：总代业绩显示列表
-7：计算总代个人奖励
+6：可以自动增加其上级总代的业绩，逐级增加业绩
+7：总代业绩显示列表
+8：计算总代个人奖励
 个人奖励=总代业绩奖励---其发展的总代业绩奖励
-8：一键导出当前业绩到excel
-9:重置业绩
+9：一键导出当前业绩到excel
+10:重置业绩
 二：微信前台
 1：普通用户可以通过微信号查询是否有授权
 2：总代通过登录可以查询当前其业绩，奖金，其下属总代业绩
 3：总代可以查看其团队的组织树形图
 4：总代可以修改密码
+
+注意：
+需要在代理表中添加一条记录：0	xuxia123	总公司			-1	-1				1	2		1
+
+用到的视图
+V_WSBALANCE_Performance
+
+with act as(
+select ag.agid,ag.agpid,ag.agname,ag.agwxnum,ac.money,ac.money*ac.proportion as team,ac.personmoney as moneyperson,ag.aglevel,ag.agstatus
+  from t_wsbalance_achievement ac,t_wsbalance_agent ag
+  where ac.agent=ag.agid
+)
+select 
+  a.agid,
+  a.agname,
+  a.agwxnum,
+  a.money,
+  a.team, 
+  a.moneyperson,
+  case when a.moneyperson=a.money then a.team
+  else  NVL(a.team-b.sumteam,a.team) end personmoney,
+  a.agpid,
+  a.aglevel,
+  a.agstatus
+from act a left join (
+ select act.agpid,sum(act.team) as sumteam from  act group by act.agpid ) b 
+ on b.agpid=a.agid
+  
+  
+  
+用到存储过程
+  create or replace procedure updateAchievementAll(newagid number,addmoney number,newproportion number)as 
+  num int;   --查询出来的数量
+  adate date;   --当前时期
+  maxID int;   --最大id 用于序列
+  PID int;    
+  Pnewproportion number;
+  pmoney number;
+  begin  
+    select count(*) into num from T_WSBALANCE_ACHIEVEMENT where agent=newagid;   --查询在achievement中是否有这条记录
+    SELECT sysdate INTO adate FROM dual;
+    if num=0 then  --没有就插入
+      select nvl(max(aid),0)+1 into maxID FROM T_WSBALANCE_ACHIEVEMENT;
+      insert into T_WSBALANCE_ACHIEVEMENT(AID,agent,money,PROPORTION,PERSONMONEY,LASTTIME) values(maxID,newagid,addmoney,newproportion,addmoney,adate);
+    end if;
+    if num>0 then   --有就更新
+      update T_WSBALANCE_ACHIEVEMENT set money=money+addmoney,PROPORTION=newproportion,LASTTIME=adate,PERSONMONEY=PERSONMONEY+addmoney where agent=newagid;
+    end if;
+    PID:=newagid;
+    while true loop   --循环更新当前上级数据
+      begin
+        select agpid into PID from T_WSBALANCE_AGENT where agid=PID;--找到器上级，这里去掉了and aglevel=0 and agstatus=0
+         if PID>0 THEN  --如果找到其上级
+            begin
+              select count(*) into num from T_WSBALANCE_ACHIEVEMENT where agent=PID;  --判断器上级是否在achievement中
+              if num>0 then      --如果在
+                select money  into pmoney from T_WSBALANCE_ACHIEVEMENT where agent=pid;  --得出上级的业绩
+                 pmoney:=pmoney+addmoney;     --上级业绩加上当期新增
+                  select proportion into Pnewproportion from T_WSBALANCE_RANGES where minnum<=pmoney and maxnum>pmoney;  --更加当前新增得到比例
+                   update T_WSBALANCE_ACHIEVEMENT set money=money+addmoney,LASTTIME=adate,proportion=Pnewproportion where agent=PID; --更新上级
+              
+              else if num=0 then  --如果不在
+                  select count(*) into num from T_WSBALANCE_AGENT WHERE agid=PID;
+                  if num>0 then 
+                     select nvl(max(aid),0)+1 into maxID FROM T_WSBALANCE_ACHIEVEMENT; --得到序列
+                     insert into T_WSBALANCE_ACHIEVEMENT(AID,agent,money,PROPORTION,personmoney,LASTTIME) values(maxID,PID,addmoney,newproportion,0,adate);
+                  end if;
+              end if;
+              end if;
+            end;
+         END if;
+        if PID=0 THEN
+          exit;
+        END IF;
+         end;
+    end loop;
+end updateAchievementAll;
+
+

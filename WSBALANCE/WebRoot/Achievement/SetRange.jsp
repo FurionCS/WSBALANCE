@@ -29,7 +29,7 @@
 <div class="row-fluid">
         <div class="span12">
             <div class="portlet box yellow">
-                <div class="portlet-title">
+                <div class="portlet-title" >
                     <div class="caption">
                         <i class="icon-reorder"></i>
                         <span class="NavTitle">填写代理信息</span>
@@ -146,7 +146,7 @@
  		}
  		
  		GetRangeAll();
- 		var count;
+ 		var count=1;
  		function GetRangeAll(){
  			$.ajax({
 	            url: "RangesAction_getRangesAll",
@@ -168,7 +168,7 @@
 	            		}
 	            		$("#formRanges").html(html);
 	            	}else{
-	            		alert("没有设置范围哦！！！");
+	            		//alert("");
 	            	}
 	            }
  			})

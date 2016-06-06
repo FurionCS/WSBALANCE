@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionSupport;
 import com.wsbalance.pojo.Agent;
 import com.wsbalance.pojo.Page;
+import com.wsbalance.service.AchievementService;
 import com.wsbalance.service.AgentService;
 import com.wsbalance.util.JsonUtil;
 
@@ -68,6 +69,9 @@ public class AgentAction extends ActionSupport implements SessionAware,ServletRe
 	}
 	@Autowired
 	private AgentService agentService;
+	
+	@Autowired
+	private AchievementService achievementService;
 	
 	public String addAgent() throws IOException{
 		agent.setAgcreateday(new Date());
@@ -176,7 +180,9 @@ public class AgentAction extends ActionSupport implements SessionAware,ServletRe
 	}
 	public String getAgentByID(){
 		Agent ag=agentService.getAgentByID(agent.getAgid());
+		Agent pag=agentService.getAgentByID(ag.getAgpid());
 		session.put("agent", ag);
+		session.put("pagent", pag);
 		return "editagent";
 	}
 	
@@ -184,9 +190,30 @@ public class AgentAction extends ActionSupport implements SessionAware,ServletRe
 		response.setCharacterEncoding("utf-8");
 		JSONObject jb =new JSONObject();
 		if(agentService.changeAgent(agent)){
+			Agent ag=(Agent) session.get("agent");
+			if(ag.getAgpid()!=agent.getAgpid()){
+				agentService.updateagcount(ag.getAgpid(), false);
+				agentService.updateagcount(agent.getAgpid(), true);
+			}
 			jb.put("code", 1);
 		}else{
 			jb.put("code", 0);
+		}
+		PrintWriter out=response.getWriter();
+		out.print(jb);
+		out.flush();out.close();
+		return null;
+	}
+	public String deleteAgent() throws IOException{
+		response.setCharacterEncoding("utf-8");
+		JSONObject jb =new JSONObject();
+		int count=agentService.getAgentByID(agent.getAgid()).getAgcount();
+		if(count>0||achievementService.getAchievementByAgent(agent.getAgid()).size()>0){
+			jb.put("code", 0);
+		}else{
+			agentService.delete(agent);
+			agentService.updateagcount(agent.getAgpid(), false);
+			jb.put("code", 1);
 		}
 		PrintWriter out=response.getWriter();
 		out.print(jb);

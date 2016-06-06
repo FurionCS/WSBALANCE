@@ -102,6 +102,22 @@
     		return "代理中"
     	}
     }
+    function deleteagent(id,agpid){
+    	  $.ajax({
+              url: "AgentAction_deleteAgent",
+              type: "POST",
+              data: { "agent.agid":id,"agent.agpid":agpid},
+              dataType: "json",
+              success: function (result) { 
+            	  if(result.code==1){
+            	  noty({ text: "删除成功！", type: "success", layout: "topCenter", timeout: 2000 });
+            	  getAgentList();
+            	  }else{
+            		  noty({ text: "删除失败！,请确认是否能删", type: "warnning", layout: "topCenter", timeout: 2000 });
+            	  }
+              }
+    	  });
+    }
     function getAgentList() {
         $.ajax({
             url: "AgentAction_getAgentAllByPage",
@@ -121,7 +137,8 @@
                         html += '<td class="hidden-480">' + changelevel(data[i].aglevel) + '</td>';
                         html += '<td class="hidden-480">' + changestatus(data[i].agstatus)  + '</td>';
                         html += '<td class="hidden-480">' + data[i].agcount + '</td>';
-                        html += '<td class="hidden-480"><a href="AgentAction_getAgentByID?agent.agid=' + data[i].agid + '" class="label label-important" style="color: white;">编辑</a></td>';
+                        html += '<td class="hidden-480"><a href="AgentAction_getAgentByID?agent.agid=' + data[i].agid + '" class="label label-success" style="color: white;">编辑</a>';
+                        html += '<a onclick="deleteagent('+data[i].agid+','+data[i].agpid+')" class="label label-important" style="color: white;margin-left:5px;">删除</a></td>';
                     }
                     $("#ListBody").html(html);
                 }
@@ -139,7 +156,7 @@
             }
         });
     }
-
+	
     function GetPageInfo(count) {
         var pageHtml = "";
         if (count != 0) {

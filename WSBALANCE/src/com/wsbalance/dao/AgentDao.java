@@ -127,6 +127,11 @@ public class AgentDao extends BaseDao{
 		}
 	}
 	
+	/**
+	 * 修改
+	 * @param agent
+	 * @return
+	 */
 	
 	public boolean changeAgent(Agent agent){
 		try{
@@ -137,10 +142,25 @@ public class AgentDao extends BaseDao{
 		ag.setAgstatus(agent.getAgstatus());
 		ag.setAgauthorization(agent.getAgauthorization());
 		ag.setAgtel(agent.getAgtel());
+		ag.setAgpid(agent.getAgpid());
+		ag.setAgdeadline(agent.getAgdeadline());
+		ag.setAgtype(agent.getAgtype());
+		ag.setAgpassword(agent.getAgpassword());
+		ag.setAgwxnum(agent.getAgwxnum());
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			return false;
 		}
 		return true;
 	}
+	public boolean delete(Agent agent){
+		try{
+			getSession().delete(agent);
+			return true;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
 }

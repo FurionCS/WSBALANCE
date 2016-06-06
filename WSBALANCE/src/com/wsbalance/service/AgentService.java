@@ -42,4 +42,7 @@ public class AgentService {
 	public boolean changeAgent(Agent agent){
 		return agentDao.changeAgent(agent);
 	}
+	public boolean delete(Agent agent){
+		return agentDao.delete(agent);
+	}
 }

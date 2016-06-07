@@ -17,10 +17,10 @@
                     <i class="icon-angle-right"></i>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">代理管理</a><i class="icon-angle-right"></i>
+                    <a href="javascript:void(0)">业绩管理</a><i class="icon-angle-right"></i>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">代理增加</a></i>
+                    <a href="javascript:void(0)">结算设定</a></i>
                 </li>
             </ul>
         </div>
@@ -130,7 +130,7 @@
 					            	}
 					            },
 					            error: function () {
-                                    noty({ text: "检查网络设置", type: 'warning', layout: 'center', timeout: 2000 });
+                                    noty({ text: "检查网络设置,或稍等操作", type: 'warning', layout: 'center', timeout: 2000 });
                                 }
 				 			});
                           }

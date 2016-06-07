@@ -1,6 +1,6 @@
-//微信号验证
+//微信号验证 
 function checkwx(wx){
-	return /^[a-zA-Z\d_]{5,}$/.test(wx);
+	return /^[a-zA-Z\d_-]{5,}$/.test(wx);
 }
 
 //等级验证

@@ -67,13 +67,13 @@ public class RangesAction extends ActionSupport implements ServletResponseAware{
 			if(rangesService.addRange(range)){
 				return "addRange";
 			}else{
-				return "";
+				return "addRange";
 			}
 		}else{
 			if(rangesService.updateRange(range)){
 				return "addRange";
 			}
-			else{return "";}
+			else{return "addRange";}
 		}
 		
 	}

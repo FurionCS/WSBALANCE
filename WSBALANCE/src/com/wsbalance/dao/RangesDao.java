@@ -60,7 +60,7 @@ public class RangesDao extends BaseDao{
 		Ranges ranges=(Ranges) getSession().load(Ranges.class, range.getRid());
 		ranges.setMinnum(range.getMinnum());
 		ranges.setMaxnum(range.getMaxnum());
-		range.setProportion(range.getProportion());
+		ranges.setProportion(range.getProportion());
 		return true;
 		}catch(Exception e){
 			System.out.println(e.getMessage());

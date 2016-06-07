@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.wsbalance.pojo.Achievement;
 import com.wsbalance.pojo.Agent;
 import com.wsbalance.pojo.Page;
 import com.wsbalance.service.AchievementService;
@@ -69,6 +70,7 @@ public class AgentAction extends ActionSupport implements SessionAware,ServletRe
 	}
 	@Autowired
 	private AgentService agentService;
+	
 	
 	@Autowired
 	private AchievementService achievementService;
@@ -189,9 +191,17 @@ public class AgentAction extends ActionSupport implements SessionAware,ServletRe
 	public String changeAgent() throws IOException{
 		response.setCharacterEncoding("utf-8");
 		JSONObject jb =new JSONObject();
+		//这里这些操作应该放到同一个事务中，暂时没放
 		if(agentService.changeAgent(agent)){
 			Agent ag=(Agent) session.get("agent");
 			if(ag.getAgpid()!=agent.getAgpid()){
+				List<Achievement> la=achievementService.getAchievementByAgent(agent.getAgid());
+				//如果他有业绩就更新业绩
+				if (la.size()>0){
+					double money=la.get(0).getMoney();
+					achievementService.removeAddAchievement(ag.getAgpid(), -money);
+					achievementService.removeAddAchievement(agent.getAgpid(), money);
+				}
 				agentService.updateagcount(ag.getAgpid(), false);
 				agentService.updateagcount(agent.getAgpid(), true);
 			}

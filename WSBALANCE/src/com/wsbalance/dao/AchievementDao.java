@@ -48,6 +48,18 @@ public class AchievementDao extends BaseDao{
 			return false;
 		}
 	}
+	public boolean removeAddAchievement(int id,double changemoney){
+		try{
+			Query query=getSession().createSQLQuery("{call RemoveupdateAchievementAll(?,?)}");
+			query.setInteger(0, id);
+			query.setDouble(1, changemoney);
+			query.executeUpdate();
+			return true;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 	/**
 	 * 更新业绩
 	 * @param achievement
@@ -115,4 +127,5 @@ public class AchievementDao extends BaseDao{
 		}
 		return true;
 	}
+	
 }

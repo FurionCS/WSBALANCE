@@ -21,6 +21,9 @@ public class AchievementService {
 	public boolean addAchievement(Achievement achievement){
 		return achievementDao.addAchievement(achievement);
 	}
+	public boolean removeAddAchievement(int id,double changemoney){
+		return achievementDao.removeAddAchievement(id, changemoney);
+	}
 	public boolean updateAchievement(Achievement achievement){
 		return achievementDao.updateAchievement(achievement);
 	}

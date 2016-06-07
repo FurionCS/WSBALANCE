@@ -51,5 +51,15 @@ public class Achievement {
 		this.personmoney = personmoney;
 	}
 	
+	public Achievement() {
+		super();
+	}
+	public Achievement(Agent agent, double money, double proportion) {
+		super();
+		this.agent = agent;
+		this.money = money;
+		this.proportion = proportion;
+	}
+	
 	
 }

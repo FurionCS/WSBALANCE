@@ -50,6 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="navbar-inner">
             <div class="container-fluid" style="padding-left:0">
                 <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                	<img src="Content/image/menu-toggler.png" alt="菜单"/>
                 </a>
                 <ul class="nav pull-right">
                     <!-- END TODO DROPDOWN -->

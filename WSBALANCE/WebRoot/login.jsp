@@ -36,12 +36,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <h3 class="form-title">登录到你的帐户</h3>
             <div class="form-group">
                 <span class="control-label">用户名</span>
-                <input type="text" class="form-control" placeholder="请输入用户名" id="playerID" name="admin.adname" value="程胜"/>
+                <input type="text" class="form-control" placeholder="请输入用户名" id="playerID" name="admin.adname" value=""/>
             </div>
             <span id="spanUser" class='tip'> </span>
             <div class="form-group">
                 <span class="control-label">　密码</span>
-                <input type="password" class="form-control placeholder-no-fix w" placeholder="请输入密码" id="password" name="admin.adpassword" value="123456" />
+                <input type="password" class="form-control placeholder-no-fix w" placeholder="请输入密码" id="password" name="admin.adpassword" value="" />
             </div>  
              <span id="spanPassword" class='tip'></span>
             <div class="form-actions">

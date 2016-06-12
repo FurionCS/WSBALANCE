@@ -133,6 +133,7 @@
                 pageSize = count;
             } else
                 pageSize = this.value;
+            pageIndex = 1;
             getPerformanceList();
         }
         document.getElementById("search").onkeyup = function () {
@@ -198,7 +199,7 @@
             dataType: "json",
             success: function (result) {  
                 if (result.code == 1) {
-                    var count = result.count;
+                   count = result.count;
                     var data=result.lp;
                     var html = "";
                     for (var i = 0; i < data.length; i++) {

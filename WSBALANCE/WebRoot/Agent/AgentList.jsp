@@ -81,6 +81,7 @@
                 pageSize = count;
             } else
                 pageSize = this.value;
+            pageIndex = 1;
             getAgentList();
         }
         document.getElementById("search").onkeyup = function () {

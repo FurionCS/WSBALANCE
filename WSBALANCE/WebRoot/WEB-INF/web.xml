@@ -58,9 +58,8 @@
   </init-param>
   <init-param>
        <param-name>notCheckURLList</param-name> 
-       <param-value>/Error/Error404.jsp;/login.jsp;</param-value> 
+       <param-value>/Error.jsp/Error404.jsp;/login.jsp;</param-value> 
   </init-param>
-   
  </filter>
   <filter-mapping>
 	  <filter-name>CheckLoginFilter</filter-name>

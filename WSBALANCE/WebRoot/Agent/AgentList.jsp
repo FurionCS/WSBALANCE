@@ -74,6 +74,7 @@
     var PSize = 10;
     var orderby = "", strSearch ="";
     var count = 0;  //总记录数
+   
     $(document).ready(function () {
     	getAgentList();
         document.getElementById("pagesize").onchange = function () {
@@ -209,6 +210,7 @@
             pageHtml += "<li class='prev disabled' ><a>← <span class='hidden-480'>上一页</span></a></li>";
             pageHtml += " <li class='next disabled'><a><span class='hidden-480'>下一页</span> → </a></li>";
             $("#pageInfo").html("显示 0 条数据到 0 条数据，总共 0 页");
+        	pageCount=0;
         }
         $("#pagePart").html(pageHtml);
         if (pageIndex > pageCount) {

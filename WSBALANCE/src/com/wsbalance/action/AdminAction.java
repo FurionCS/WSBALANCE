@@ -42,7 +42,6 @@ public class AdminAction extends ActionSupport implements SessionAware,ServletRe
 	}
 	/*private Map session=ActionContext.getContext().getSession();*/
 	public String checkAdmin(){
-		
 		List<Admin> la=adminService.checkAdmin(admin);
 		if(la.size()>0){
 			session.put("admin", la.get(0));
